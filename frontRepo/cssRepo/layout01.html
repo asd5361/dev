@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>주문하기</title>
+    <style>
+        /* *{
+            margin: 0px;
+            padding: 0px;
+            list-style-type: none;
+        } */
+        form{
+            padding-left: 20px;
+        }
+        button[ type="submit"]{
+            width: 100%;
+        }
+        input[type="time"]{
+            width: 100%;
+        }
+        .t01{
+            width: 400px;
+        }
+        .t01 > tbody > tr:first-child > td:first-child{
+            width: 30%;
+        }
+        
+    </style>
+</head>
+<body>
+    <h1>주문하기</h1>
+    <!-- <form action="데이터 전송">
+        <ul>
+            <li><label>고객명 : <input type="text" name="custorname"></label></li>
+            <li><label>전화번호 : <input type="number" name="phone"></label></li>
+            <li><label>E-mail : <input type="email" name="email"></label></li>
+        </ul>
+        <fieldset>
+            <legend>피자 사이즈</legend>
+            <ul>
+                <li><input type="radio" value="small" id="small"name="pizzaSize"><label for="small">small</label></li>
+                <li><input type="radio" value="medium" id="medium" name="pizzaSize"><label for="medium">Medium</label></li>
+                <li><input type="radio" value="large" id="large" name="pizzaSize"><label for="large">Large</label></li>
+            </ul>
+        </fieldset>
+        
+        <fieldset>
+            <legend>토핑 선택</legend>
+            <ul>
+                <li><input type="checkbox" value="베이컨" id="베이컨" name="select"><label for="베이컨">베이컨</label></li>
+                <li><input type="checkbox" value="치즈" id="치즈" name="select"><label for="치즈">치즈</label></li>
+                <li><input type="checkbox" value="양파" id="양파" name="select"><label for="양파">양파</label></li>
+                <li><input type="checkbox" value="버섯" id="버섯" name="select"><label for="버섯">버섯</label></li>
+            </ul>
+        </fieldset>
+        <ul>
+            <li>희망 배송 시간 : <input type="time"></li>
+            <li>배송 시 요청사항 : <textarea></textarea></li>
+            <li><input type="submit" value="주문하기"></li>
+        </ul>
+    </form> -->
+    <form>
+        <table>
+            <tr>
+                <td>고객명</td>
+                <td><input type="text" name="고객명"></td>
+            </tr>
+            <tr>
+                <td>전화번호</td>
+                <td><input type="number" name="전화번호"></td>
+            </tr>
+            <tr>
+                <td>E-mail</td>
+                <td><input type="email" name="E-mail"></td>
+            </tr>
+        </table>
+        <fieldset>
+            <legend>피자 사이즈</legend>
+            <table>
+                <tr>
+                    <td><input type="radio" value="small" name="size"></td>
+                    <td>Small</td>
+                </tr>
+                <tr>
+                    <td><input type="radio" value="medium" name="size"></td>
+                    <td>Medium</td>
+                </tr>
+                <tr>
+                    <td><input type="radio" value="large" name="size"></td>
+                    <td>Large</td>
+                </tr>
+            </table>
+        </fieldset>
+        <fieldset>
+            <legend>토핑 선택</legend>
+            <table>
+                <tr>
+                    <td><input type="checkbox" value="베이컨" name="select"></td>
+                    <td>베이컨</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" value="치즈" name="select"></td>
+                    <td>치즈</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" value="버섯" name="select"></td>
+                    <td>버섯</td>
+                </tr>
+            </table>
+        </fieldset>
+        <table class="t01">
+            <tr>
+                <td>희망 배송 시간</td>
+                <td class="second"><input type="time"></td>
+            </tr>
+            <tr>
+                <td>배송 요청사항</td>
+                <td class="second"><textarea></textarea></td>
+            </tr>
+            <tr>
+                <td colspan="2"><button type="submit">주문하기</button></td>
+            </tr>
+        </table>
+    </form>
+</body>
+</html>

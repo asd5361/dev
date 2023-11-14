@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>폼태그</title>
+    <style>
+        li{list-style-type:none}
+    </style>
+</head>
+<body>
+    <h1>폼태그</h1>
+    <pre>
+        form : 데이터 제출할 떄 사용
+        form 태그의 action 속성 : 데이터를 전달받을 서버측 URL
+        input : 사용자(일반유저)의 입력값을 받음
+        input 태그의 name 속성 : 입력값을 서버로 전달할 때, key값 역활을 함
+        submit : form 내의 input 태그들의 값을 제출
+    </pre>
+    
+    <form action="데이터를 제출할 주소">
+        <ul>
+            <li>아이디 : <input type="text" name = "memberId"></li>
+            <li> 비밀번호 : <input type="password" name="memberPwd"></li>
+            <li><input type="submit" value="로그인"></li> <!-- <li><button>로그인</button></li> -->
+        </ul>
+        <!--input type : button -> 일반 버튼 / submit -> 요청한 곳으로 값 제출하기(form action 속성값) -->
+    </form>
+    
+    <br><br><br><hr>
+
+    <h3>fieldset, legend</h3>
+
+    <pre>
+        fieldset:폼 요소를 그룹으로 묶어줌
+        legend : 묶은 폼 요소에 이름 붙여줌
+    </pre>
+    <form>
+        <fieldset>
+            <legend>회원정보</legend>
+            아이디 : <input type="text" name="memberId"><br>
+            비밀번호 : <input type="password" name="memberPwd">
+        </fieldset>
+
+        <fieldset>
+            <legend>배송정보</legend>
+            수령인 : <input type="text" name="recvName"><br>
+            주소 : <input type="text" name="addr">
+        </fieldset>
+
+        <input type="submit" value="제출">
+    </form>
+
+    <br><br><br><hr>
+
+    <h3>텍스트 관련</h3>
+    <form>
+        <input type="text"placeholder="아이디를 입력하세요." value="" 
+               name="memberId" size="15" maxlength="10"required> <br>
+        <input type="password" placeholder="비밀번호를 입력하세요"> <br>
+        <input type="search">
+        <br>
+        <input type="url">
+        <br>
+        <input type="email">
+        <br>
+        <input type="tel">
+        <br>
+
+        <input type="submit" value="제출" ><br>
+        <input type="reset" value="리셋" ><br>
+    </form>
+    <br><br><br><hr>
+    <h3>숫자 관련</h3>
+    <form>
+        <input type="number" min="0" max="15" step="3">
+        <br>
+        <input type="range" min="0" max="100" step="10" value="30">
+        <input type="submit" value="제출">
+    </form>
+    <br><br><br><hr>
+    <h3>날짜,시간 관련</h3>
+    <form>
+        <input type="date" value="2024-02-01">
+        <br>
+        <input type="time" value="12:42">
+        <br>
+        <input type="datetime-local" value="2023-10-24 12:43">
+    </form>
+    <br><br><br><hr>
+    <h3>라디오 버튼, 체크박스 관련</h3>
+    <pre>
+        라디오 : 여러 개 중 하나
+        체크박스 : 다중 선택
+    </pre>
+    <form action="helloword">
+        <input type="radio" value="m" name="gender"> 남자
+        <input type="radio" value="w" name="gender"> 여자
+        <br>
+        <input type="checkbox" value="감자" name="hobby"> 감자
+        <input type="checkbox" value="고구마" name="hobby"> 고구마
+        <input type="checkbox" value="당근" name="hobby"> 당근
+        <br><input type="submit" value="제출">
+    </form>
+    <br><br><br><hr>
+    <h3>기타</h3>
+
+    <form action="액션속성값">
+        <input type="color">
+        <input type="file">
+        <input type="hidden">
+    
+        <br>
+        <select name="national">
+            <option value="ko">한국</option>
+            <option value="ch">중국</option>
+            <option value="jp">일본</option>
+        </select>
+        <br>
+        <textarea placeholder="내용을 입력하세요" row="30" cols="50" style="resize:none;">
+        zzzzzzzzz
+        </textarea>
+        <br>
+        <input type="submit" value="제출">
+    </form>
+</body>
+</html>

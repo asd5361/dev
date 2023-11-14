@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UI구현()</title>
+    <style>
+        input{
+            border:0 solid black;
+            border-bottom: 2px dashed black;
+            background-color: rgb(240, 240, 240);
+        }
+        table{
+            text-align: center;
+            margin: 100px auto;
+            padding: 80px 20px 0;
+            border: 1px solid #ccc;
+            width : 400px;
+            background-color:  rgb(240, 240, 240);
+        }
+        table th{
+            text-align: left;
+            height: 15px;
+        }
+        .tt input{
+            width: 75px;
+        }
+        button{
+            margin-top: 30px;
+            width: 350px;
+            background-color: rgb(181, 240, 181);
+            height: 50px;
+            color:green;
+            font-weight: bold;
+            font-size: 18px;
+            border: none;
+        }
+        #user01, #pwd01,#pwdc01{
+            font-size: 8px;
+            color : red;
+        }
+    </style>
+</head>
+<body>
+        <table>
+            <tr>
+                <th>아이디</th>
+                <td><input type="text" id="userId"></td>
+            </tr>
+            
+            <tr>
+                <th></th>
+                <td id="user01"></td>
+            </tr> 
+       
+            <tr>
+                <th>패스워드</th>
+                <td><input type="text" id="pwd"></td>
+            </tr>
+            <tr>
+                <th></th>
+                <td id="pwd01"></td>
+            </tr>
+            <tr>
+                <th>패스워드 확인</th>
+                <td><input type="text" id = "pwdc"></td>
+            </tr>
+            <tr>
+                <th></th>
+                <td id="pwdc01"></td>
+            </tr> 
+            <tr>
+                <th>이메일</th>
+                <td class="tt"><input type="text" id="aaa">@<input type="text"></td>
+            </tr>
+            <tr>
+                <th></th>
+                <td></td>
+            </tr>
+            <tr>
+                <th>주소</th>
+                <td><input type="text"></td>
+            </tr>
+            <tr>
+                <th></th>
+                <td></td>
+            </tr>
+            <tr>
+                <th></th>
+                <td><input type="text"></td>
+            </tr>
+            <tr>
+                <th colspan="2"><button>가 입</button></th>
+            </tr>
+        </table>
+
+    <script>
+        const pwd = document.querySelector("#pwd");
+        const userId = document.querySelector("#userId");
+        const pwdc = document.querySelector("#pwdc");
+        
+        pwd.addEventListener("click",()=>{
+            let pwd01 = document.querySelector("#pwd01");
+            pwd01.innerText="영문자 대/소문자 특수문자, 숫자 포함 8 ~ 32자";
+        });
+        
+        
+        userId.addEventListener("blur",(event)=>{
+            const x =event.target.value;
+            const user01 = document.querySelector("#user01");
+            if(x.length < 1){
+                user01.innerHTML="필수 입력 항목 입니다";
+            }else{
+                user01.innerHTML="";
+            }
+        });
+
+
+        pwd.addEventListener("blur",(evnet)=>{
+            const x = evnet.target.value;
+            const pwd01 = document.querySelector("#pwd01");
+            if(x.length < 1){
+                pwd01.innerHTML="필수 입력 항목 입니다";
+            }else{
+                    t01.innerHTML="";
+                }
+        
+        });
+
+        pwdc.addEventListener("blur",(evnet)=>{
+            const x = evnet.target.value;
+            const pwdc01 = document.querySelector("#pwdc01");
+            if(x.length < 1){
+                pwdc01.innerHTML="필수 입력 항목 입니다";
+            }else{
+                pwdc01.innerHTML="";
+            }
+        });
+        
+    </script>
+</body>
+</html>

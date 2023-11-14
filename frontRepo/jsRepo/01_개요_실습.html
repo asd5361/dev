@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>개요 실습</title>
+</head>
+<body>
+    
+    <h1>실습</h1>
+
+    <h2>1. 색상 조절하기</h2>
+
+    <pre>
+        버튼 클릭하면,
+        아래 div 의 색상을 red로 변경하기
+
+    </pre>
+
+    <button id="btn01" onclick="f01();">빨간색으로 변경하는 버튼</button>
+    <div id="div01">빨간색으로 바뀔 div</div>
+    <script>
+        function f01(){
+            x = document.querySelector("#div01");
+            x.style.backgroundColor = 'red';
+            x.style.color='#fff';
+        }
+    </script>
+
+    <br><br><br>
+    <hr>
+    <br><br><br>
+
+
+    <h2>2. 색상 조절하기</h2>
+    <pre>
+        버튼 클릭하면, 
+        아래 div 의 색상을 유저한테 입력받은 값으로 변경하기
+        ex )
+        유저가 red 라고 입력하면 red 로 변경
+        유저가 blue 라고 입력하면 blue 로 변경
+        
+    </pre>
+    <input type="color">
+    <button id="btn02" onclick="f02()">색 변경 버튼</button>
+
+    <div id="div02">색 바뀔 DIV</div>
+
+    <script>
+        function f02(){
+            inputColor = document.querySelector("input[type=color]");
+            
+            // str = prompt("원하는 색상을 입력하세요");
+            x = document.querySelector("#div02");
+            x.style.backgroundColor = inputColor.value;
+        }
+    </script>
+
+    <input type="text" placeholder="이름을 입력하세요"value="홍길동">
+    <script>x = document.querySelector("input[type=text]");
+        console.log(x.placeholder);
+        console.log(x.value);
+    </script>
+    <br><br><br><br><br>
+
+    <div id="box">박스</div>
+
+    <input type="text" name="ip01" placeholder="너비"><br>
+    <input type="text" name="ip02" placeholder="높이"><br>
+    <input type="text" name="ip03" placeholder="색상"><br>
+    <button onclick="changeBox();">적용</button>
+
+    <script>
+        function changeBox(){
+            x = document.querySelector("#box");
+            in01 = document.querySelector("input[name=ip01]");
+            in02 = document.querySelector("input[name=ip02]");
+            in03 = document.querySelector("input[name=ip03]");
+            x.style.width=in02.value+"px";
+            x.style.height=in01.value+"px";
+            x.style.backgroundColor=in03.value;
+        }
+    </script>
+
+    <br><br><br><br><br>
+    가격:<input type="text" name="price"><br>
+    수량:<input type="text" name="cnt"><br>
+    <button id ="calcBtn" onclick="calcPrice();">금액 계산하기</button><br>
+    결제금액:<span id="result">0원</span>
+
+    <script>
+        function calcPrice(){
+            price=document.querySelector("input[name=price]");
+            cnt = document.querySelector("input[name=cnt]");
+            result = document.querySelector("#result");
+            result.innerHTML=cnt.value * price.value+"원";
+        }
+    </script>
+
+
+</body>
+</html>

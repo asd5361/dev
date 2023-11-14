@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>이벤트</title>
+    <script defer src="09_이벤트.js"></script>
+</head>
+<body>
+    <h1>이벤트</h1>
+
+    <pre>
+        * 고전 이벤트 모델
+        * 인라인 이벤트 모델
+        * 표준 이벤트 모델
+
+        기본 이벤트 제거
+    </pre>
+    <button id="btn01">버튼01 (고전)</button>
+    <button id="btn02" onclick="f02();">버튼02 (인라인)</button>
+    <button id="btn03">버튼03 (표준)</button>
+
+    <a href="https://www.naver.com" onclick="return false;">네이버 이동</a>
+
+    <form action="join" onsubmit="return f05();">
+        아이디 : <input type="text" name="memberId"><br>
+        비밀번호 : <input type="password" name="memberPwd"><br>
+        비밀번호 확인 : <input type="password" name="memberPwd2"><br>
+        닉네임 : <input type="text" name="memberNick"><br>
+        <input type="submit" value="회원가입">
+    </form>
+
+</body>
+</html>

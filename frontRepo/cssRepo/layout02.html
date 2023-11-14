@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>layout02</title>
+    <style>
+        *{
+            margin: 0px;
+            padding: 0px;
+            
+
+        }
+        header{
+            width: 100vw;
+            display:flex;
+            justify-content: center;
+            align-items: center;
+        }
+        header div{
+            width: 150px;
+            height: 150px;
+            border: 1px solid #ccc;
+            /* vertical-align:bottom; */
+        }
+        header > div:nth-child(2){
+            width: 300px;
+            line-height: 150px;
+            text-align: center;
+        }
+ 
+    </style>
+</head>
+<body>
+    <header>
+        <div></div>
+        <div><input type="text" name="검색"><input type="submit" value="검색"></div>
+        <div></div>
+    </header>
+</body>
+</html>

@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>배열_실습</title>
+</head>
+<body>
+    <h1>배열_실습</h1>
+
+    <hr>
+
+    <h2>문제 1</h2>
+    <p>
+        다음 보기에 있는 데이터들은 배열로 받고 하나의 배열로 합쳐보세요.<br>
+        이때 입력 필드에 배열에 있는 데이터를 전송하면 배열의 alert를 통하여<br>
+        배열의 위치를 알려주고, 없으면 "존재하지 않습니다"를 알려주면 됩니다.<br>
+    </p>
+
+    <fieldset>
+        <legend>보기</legend>
+        <label id="la1">사과,바나나,당근</label><br>
+        <label id="la2">김밥,치즈,떡볶이,햄버거</label><br>
+        <label id="la3">환타,사이다,콜라</label><br>
+        <label id="la4">고양이,강아지</label><br>
+	</fieldset>
+	<br>
+    <input type="text" placeholder="찾을 문자열을 입력하세요" size=100 id="text">
+	
+    <button onclick="arrayTest1();"> 전송 및 처리 </button>
+
+    <script>
+        
+        function arrayTest1(){
+            const str1 = document.querySelector("#la1").innerText;
+            const str2 = document.querySelector("#la2").innerText;
+            const str3 = document.querySelector("#la3").innerText;
+            const str4 = document.querySelector("#la4").innerText;
+
+            const arr1 = str1.split(",");
+            const arr2 = str2.split(",");
+            const arr3 = str3.split(",");
+            const arr4 = str4.split(",");
+
+            const arr = arr1.concat(arr2 , arr3, arr4);
+
+            const inputTag = document.querySelector("#text");
+            const userStr = inputTag.value;
+            const result = arr.indexOf(userStr);
+            if(result === -1){
+                alert("존재하지 않는 단어입니다");
+            }else{
+                alert("입력하신 단어는" + (result + 1) + "번 째 단어입니다.");
+            }
+        }
+
+    </script>
+    
+    <hr>
+
+    <h2>문제 2 </h2>
+
+    <p>    
+        다음 보기에 있는 문자열을 가지고 정답과 같이 만드세요. (별도의 문자열을 쓰면 안 된다.)<br>
+        그리고 출력 부분에 출력하도록 하면 됩니다.
+        정답 : "bklove"
+    </p>
+
+    <fieldset>
+        <legend>보기</legend>
+
+        <label id="stringla1">k b</label><br>
+        <label id="stringla2">e v o l</label><br>
+    </fieldset>
+
+    <br>
+
+    <p style="border:1px solid red;" id="print">이 부분에 정답이 출력 될 수 있도록 하세요</p>
+
+    <button onclick="reverseTest();">처리</button>
+    
+    <script>
+
+        function reverseTest(){
+            const print = document.querySelector("#print");
+
+            const str1 = document.querySelector("#stringla1").innerText;
+            const str2 = document.querySelector("#stringla2").innerText;
+
+            const arr1 = str1.split(" "); //문자열에서, 공백문자 기준으로 잘라서 배열로 만들어서 리턴합니다.
+            const arr2 = str2.split(" "); //문자열에서, 공백문자 기준으로 잘라서 배열로 만들어서 리턴합니다.
+
+            result1 = arr1.reverse();
+            result2 = arr2.reverse();
+            const resultAll = result1.concat(result2);
+            result = resultAll.join("");
+
+            print.innerText = result;
+        }
+        
+    </script> 
+
+    <hr>
+    
+    <h2>문제 3</h2>
+    <p>
+        문자열을 여러 개 입력받은 후 출력 버튼 클릭 시 입력했던 모든 문자열이 출력되도록 만드세요.<br>
+        단, 모든 문자열은 내림차순으로 정렬 후에 출력된다.
+        예) 개구리 -> 입력, 바나나 -> 입력, 복숭아 -> 입력<br>
+        출력 : 복숭아, 바나나, 개구리
+    </p>
+    
+    <fieldset>
+        <legend>입력</legend>
+        <input type="text" id="strInput"><button onclick="input()">입력</button>
+	</fieldset>
+	<br>
+    <p style="border:1px solid red;" id="print2">이 부분에 정답이 출력 될 수 있도록 하세요</p>
+	<div id="result1"></div>
+    <button onclick="print()">출력</button>
+
+    <script>
+
+        const arr = [];     //정답 영역에 출력할 비어있는 배열 준비
+
+        function input(){
+            const strInput = document.querySelector("#strInput");
+            arr.push(strInput.value);   //입력받은 내용을 배열에 넣어줌
+            strInput.value = "";        //기존 입력창 비우기
+        }
+
+        function print(){
+            const print2 = document.querySelector("#print2");
+
+            arr.sort().reverse();   //오름차순 정렬 후, reverse 를 통해 내림차순 정렬 처럼 만듦
+
+            const str = arr.join(",");  //배열의 요소의 중간중간 콤마 를 추가하여 하나의 문자열로 만듦
+            print2.innerHTML = str;
+        }
+
+    </script>
+    
+    <hr>
+
+    <h2>문제 4</h2>
+
+    <p>
+        다음 보기의 문자열을 바탕으로<br>
+        삭제할 음식과 추가할 음식을 입력받아서  <br>
+        지우고, 추가하는 코드를 작성하여라. (단, 1개씩 입력)<br>
+        <br>
+        예시) 삭제 : 당근  / 추가 : 타코야끼 <br>
+        결과-> 피자 치킨 햄버거 떡볶이 타코야끼  <br>
+    </p>
+
+    <fieldset>
+        <legend>보기</legend>
+        <label id="stringla4">피자 치킨 당근 햄버거 떡볶이</label><br>
+    </fieldset>
+    
+    <br>
+    
+	<input type="text" id="remove" size="25" placeholder="삭제할 음식 이름을 입력하세요">
+	<input type="text" id="add" size="25" placeholder="추가할 음식 이름을 입력하세요">
+    <p style="border:1px solid red;" id="print4">이 부분에 정답이 출력 될 수 있도록 하세요</p>
+	<button onclick="arrayTest3();">처리 및 출력</button>  
+    
+    <script>
+
+        function arrayTest3(){
+            const str = document.querySelector("#stringla4").innerText;
+            const arr = str.split(" ");
+            
+            const removeStr = document.querySelector("#remove").value;
+            const addStr = document.querySelector("#add").value;
+
+            //반복문을 통해서, 모든 요소를 돌며 삭제할 문자열에 해당하는지 탐색
+            for(let i = 0 ; i < arr.length; ++i){
+                if(arr[i] === removeStr){       //arr[i] 요소가 삭제대상이라면?
+                    arr.splice(i , 1);          //i번째 인덱스부터 1개를 선택하여 잘라낸다.
+                    break;                      //하나 찾아서 잘라냈으니,,, 다음 요소들은 볼 필요 없으니 브레이크. (중복되는 메뉴가 없으니까)
+                }
+            }
+
+            arr.push(addStr);       //추가한 메뉴
+
+            document.querySelector("#print4").innerText = arr.join(" ");    //화면에 결과 출력
+        }
+
+    </script>
+</body>
+</html>

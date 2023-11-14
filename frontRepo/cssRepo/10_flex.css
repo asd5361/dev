@@ -1,0 +1,32 @@
+#wrap{
+    display: flex;
+
+    width: 350px;
+    height: 350px;
+    border: 5px dashed gray;
+
+    /* 마시멜로 포장 */
+    flex-wrap: wrap;
+
+    /* 마시멜로 간격 */
+    /*justify-content: space-evenly;*/
+
+    /* 꼬챙이 위치 조정*/
+    /*align-items: center;*/
+
+    /* 꼬챙이 간격 조정 */
+    /*align-content: center;*/
+
+}
+
+.box{
+    width: 100px;
+    height: 100px;
+    border : 1px solid red;
+}
+.box:nth-child(2){
+    background-color: blue;
+    align-self: center;
+    order:-1;
+}
+

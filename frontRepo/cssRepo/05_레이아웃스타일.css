@@ -1,0 +1,99 @@
+#t01{
+    background-color: aqua;
+    width:50px;
+    height: 50px;
+    /*vw vh 는 내가 보는 화면 기준, %는 부모 기준*/
+}
+span{
+    width:50px;
+    height:100px;
+    background-color: green;
+    display: inline=block;
+}
+/*
+    인라인 : 글자가 있는 만큼만 공간차지
+            크기 조절 불가능
+
+    블럭 : 한 줄 전체를 차지
+            크기 조절 가능
+*/
+#t02{
+    width: 100px;
+    height: 100px;
+    background-color: gray;
+    display: block;
+
+    border-width: 5px;
+    border-color: blue;
+    border-style: dashed;
+
+    border: 3px solid green;
+
+    border-top: 5px solid brown;
+    border-bottom: 5px solid brown;
+    border-left: 5px solid brown;
+    border-right: 5px solid brown;
+
+    border-radius: 10px;
+
+    border-bottom-left-radius: 50px;
+
+    margin: 100px;
+}
+.box{
+    /* float: left; */
+    width: 400px;
+    height: 400px;
+    border: 5px dashed black;
+    background-color: lightgray;
+    display: inline-block;
+}
+#target{
+    margin:10px;
+    padding: 50px;
+}
+.ptest{
+    width: 100px;
+    height: 100px;
+    background-color: gray;
+}
+   
+#p03{
+    background-color: red;
+    position: static;
+    position: sticky;
+    bottom: 100px;
+    left: 1000px;
+
+    /* 픽스드는 레이어가 맨 뒤, 화면(뷰어)기준 절댓값
+    엡솔은 레이어가 맨 앞, body에서 절댓값 
+    릴레이티브원래 공간은 차지하면서 보이는 것만 움직인다.*/
+    /*
+    스테틱은 기본값 (기본대로 흐른다)
+    릴레이티브는 상대적으로 위치
+    엡솔은 static 아니면 부모 인정
+    픽시드는 화면 기준으로 절대값 고정
+    스틱키는 기본은 relative, fixed가 가능하면 적용
+    */
+
+}
+
+#p02{
+    background-color: red;
+    width: 200px;
+    height: 50px;
+
+    position: static;   /* 기본값 */
+
+    position: sticky;
+    top: 50px;
+    left: 100px;
+}
+#wrap{
+    width: 400px;
+    height: 400px;
+    border: 3px dashed black;
+    position: absolute;
+    background-color: orange;
+    top: 0px;
+}

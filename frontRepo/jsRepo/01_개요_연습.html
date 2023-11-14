@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>개요 연습</title>
+
+    <style>
+        div{
+            background-color: gray;
+            width: 100px;
+            height: 100px;
+            /* display: inline-block;
+            box-sizing: border-box;
+            vertical-align: middle;
+            text-align: center;
+            line-height: 90px;
+            color:#fff;
+            font-family: Noto San ko; */
+        }
+        #box {
+        }
+        #rbox{
+            background-color: red;
+        }
+        #blue-box{
+            background-color: blue;
+        }
+        .abc{
+            border:2px solid black;
+        }    </style>
+
+</head>
+<body>
+    
+
+    <div>1번</div>
+    <div>2번</div>
+
+    <div class="abc" id="box">박스</div>
+    <div class="abc" id="rbox">빨간색 박스</div>
+    <div class="abc" id="blue-box">파란색 박스</div>
+
+    <script>
+        const x = document.querySelector("#rbox");
+        body.innerText= x;
+        console.log(x);
+        
+        const arr = document.querySelectorAll(".abc");
+        for(i=0; i<arr.length; i++){
+            console.log(arr[i]);
+        }
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>개요</title>
+</head>
+<body>
+    <h1>개요</h1>
+    <pre>
+        웹 브라우저에서 많이 사용되는 인터프리터 방식의 스크립트 언어(함수, 객체지향)
+        - 인터프리터 방식 : 컴파일 과정 없이 실행하면서 코드를 하나씩 읽어내는 방식이다. 
+        (코드에 문법에 오류가 있으면 실행 시점에 알 수 있다.)
+    </pre>
+    
+    <h3>01.자바 스크립트 사용법</h3>
+    <pre>
+        내부
+        외부
+        인라인
+    </pre>
+    <button onclick='document.write("<h1>동적으로 추가한 글자 ㅎㅎㅎ</h1>");'>버튼(내부)</button>
+    <!-- <script src="01_개요.js"></script> -->
+    
+    <h3>2. 데이터 입출력</h3>
+    
+    <pre>
+        window.alert    <!--알람창 출력-->
+        window.confirm  <!--예/아니오-->
+        window.prompt   <!--글자입력-->
+        document.write  <!---->
+        console.log
+    </pre>
+    <script>
+        //window.alert('알람~~~!!!');
+
+        // x = confirm("당신은 성인인가요?");
+        // console.log(x);
+
+        // x = prompt("당신의 이름은?");
+        // console.log(x);
+        
+    </script>
+
+    <h3>03. 요소 선택</h3>
+    <div class="box" id="target">얖</div>
+    <script>
+        // x = document.querySelector("#target");
+        // x = document.querySelector(".box");
+        // x = document.querySelector("div"); //첫번째만 가져온다.
+        // x = document.querySelectorAll //("div"); //배열로 모두 가져온다.
+        // console.log(x);
+
+        // document.getElementById('target');
+        // document.getElementsByClassName('box');
+        // document.getElementsByTagName('div');
+
+        /**요소 가져와서 내부의 글자를 변경해보기***/
+        x = document.querySelector("#target");
+
+        //내부의 글자 텍스트만 바꿔줌
+        // x.innerText = "글자 변경"; 
+        // 내부의 글자 HTML로 바꿔줌
+        x.innerHTML = "글자<br>변경"; 
+
+        /*******요소 가져와서 배경색 변경******/
+        //배경색 변경
+        x.style.backgroundColor = "red";
+    </script>
+
+    <button onclick="f01();">버튼</button>
+    
+    <div id="kh">디브</div>
+
+    <script>
+        function f01(){
+            x = document.querySelector('#kh');
+            x.style.backgroundColor = 'red';
+        }
+    </script>
+</body>
+</html>

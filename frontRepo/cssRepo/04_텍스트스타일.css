@@ -1,0 +1,46 @@
+/*font family*/
+
+#ff01{
+    font-family: '궁서체'; 
+    font-size: 16px;
+    font-size: 2.0em;
+    font-size: 200%;
+}
+#ff02{
+    font-family: '굴림체';
+    font-weight: bold;
+    font-weight: lighter;
+    font-weight: 900;
+}
+#ff03{
+    font-family: '내가만든글씨체','대체글꼴','굴림체';
+}
+#ff04{
+    font-style: italic;
+    font-style: oblique;
+    font-size: 3rem;
+    color: red;
+    text-decoration: underline;
+    text-decoration :line-through;
+    text-decoration: overline;
+    text-decoration: none;
+}
+#ts{
+    background-color: antiquewhite;
+    font-size: 5rem;
+    font-weight: 900;
+    color:rgba(255, 255, 51, 0.842);
+    text-shadow:0px 0px 4px #ccc,
+    0px -5px 4px #ff3,
+    2px -10px 6px #fd3,
+    -2px -15px 11px #f80,
+    2px -19px 18px #f20
+    ;
+}
+#ta{
+    text-align:justify; /*양쪽 정렬*/
+    line-height:30px;
+}
+#lst li{
+    list-style-type:none;
+}

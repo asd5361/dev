@@ -1,0 +1,129 @@
+*{
+    margin:0;
+    padding: 0;
+    list-style-type: none;
+    font-family: "맑은 고딕", "굴림체";
+    font-weight: bold;
+}
+a{
+    text-decoration:none;
+    color: inherit;
+}
+a:hover{
+    color:hsl(180, 90%, 16%);
+}
+/* 상단 해더 부분*/
+body{
+    padding-top: 15vh;
+}
+header{
+    position: fixed;
+    top: 0;
+    border-bottom: 3px solid aqua;
+    height: 15vh;
+    width: 100vw;
+    background-color: #fff;
+    text-align: center;
+}
+header > ul{
+    color: hsl(180, 90%, 16%);
+    font-size: 20px;
+    
+}
+header > ul > li{
+    width: 20%;
+    display: inline-block;
+    line-height: 15vh;
+}
+
+header > ul > li > a:hover{
+    color: aqua;
+}
+/*nav 부분*/
+nav{
+    height: 40vh;
+    background-color: azure;
+    border-bottom: 3px solid aqua;
+    text-align: center;
+    line-height: 38vh;
+    font-size:50px;
+    color: #ccc;
+}
+#p02{
+    color:#fff;
+}
+section{
+    height: 30vh;
+    margin-top: 30vw;
+    margin-left: 10vw;
+    margin-bottom: 8vh;
+}
+
+section >#s01> div {
+    width: 20%;
+    height: 20vh;
+    margin-right: 10vw;
+    display: inline-block;
+    background-color: aqua;
+    font-size: 20px;
+    text-align: center;
+    line-height: 20vh;
+    color: #fff;
+}
+footer{
+    margin-top: 30vh;
+    height: 60vh;
+    background-color: #535353;
+    color:#fff;
+    font-size: 80px;
+    text-align: center;
+    line-height: 60vh;
+}
+/*********회원가입 부분*************/
+h1{ 
+    text-align: center;
+    line-height: 30vh;
+    font-size: 60px;
+}
+h2{
+    padding-top: 5vh;
+}
+main{
+    margin: 0 auto 20vh;
+    width: 60vw;
+    height: 80vh;
+    background-color: bisque;
+}
+form{
+    text-align: center;
+}
+form ul{
+    width: 30vw;
+    margin-left: 40vh;
+}
+form ul li{
+    text-align: left;
+    margin-top: 5vh;
+    height:10%;
+}
+
+form ul li input{
+    margin-left: 10px;
+}
+
+form ul li input[type="submit"],button{
+    text-align: center;
+    background-color: #fff;
+    border-style: none;
+    border-radius: 1rem;
+    width: 200px;
+    font-size: 20px;
+}
+input[type="submit"]:hover,button:hover{
+    color:#fff;
+    background-color: aqua;
+    border-style: none ;
+}
+button{
+    
+}

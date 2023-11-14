@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS 선택자</title>
+    <style>
+        * {
+            /* background-color: red; */
+        }
+        li{
+            background-color: gray;
+        }
+        .kh{
+            background-color: blue;
+        }
+        .red{
+            background-color: red;
+        }
+        #target{
+            background-color: green;
+        }
+    </style>
+</head>
+<body>
+    <pre>
+        선택자란?
+        특정 HTML 요소를 선택할 때 사용
+    </pre>
+    <h2>1. 모든 요소를 선택하는 선택자</h2>
+    <pre>
+        * : HTML 문서 내 모든 태그를 선택할 때 사용
+
+        *{
+            스타일 속성 : 값;
+            스타일 속성 : 값;
+            스타일 속성 : 값;
+            ...
+        }
+    </pre>
+    
+    <h2>2. 태그 선택자</h2>
+    <pre>
+        HTML 문서 내 같은 태그를 모두 선택
+    </pre>
+    <h2>3. 클래스 선택자</h2>
+    <pre>
+        HTML 문서 내 여러 개의 태그를 동일한 클래스명으로 지정하여 선택
+    </pre>
+    <h2>4. 아이디 선택자</h2>
+    <pre>
+        HTML 문서 내 해당 아이디를 가진 태그를 선택
+
+        #아이디{
+            스타일 속성 : 값;
+            스타일 속성 : 값;
+            스타일 속성 : 값;
+            ...
+        }
+    </pre>
+
+
+    <ul>
+        <li class="kh">ㅎㅇㅎㅇ</li>
+        <li class="kh">ㅎㅇㅎㅇㅎ</li>
+        <li id = "target">ㅎㅇㅎㅇ</li>
+        <li>ㅎㅇㅎㅇ</li>
+        <li  class="kh red">ㅎㅇㅎㅇ</li>
+    </ul>
+</body>
+</html>

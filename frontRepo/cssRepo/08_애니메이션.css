@@ -1,0 +1,55 @@
+.box{
+    border : 3px solid black;
+    width: 200px;
+    height: 200px;
+
+}
+#t01:hover{
+    transform: translateX(100px);
+    background-color: gray;
+    transition: 1500ms;
+    transition-timing-function:cubic-bezier(0.25,0.25,1,1);
+
+}
+@keyframes kh{ /*0~100% 대신 from~to를 써도 된다.*/
+    0%{
+        background-color: red;
+        transform: perspective(100px) rotate3d(1,1,1, 45deg);
+    }
+    25%{
+        background-color: beige;
+        transform: perspective(100px) rotate3d(1,1,1, 0deg);
+    }
+    50%{
+        background-color: blue;
+        transform: perspective(100px) rotate3d(1,1,1, 90deg);
+    }
+    75%{
+        background-color: brown;
+        transform: perspective(100px) rotate3d(1,1,1, 0deg);
+    }
+    100%{
+        background-color: black;
+    }
+}
+#t02:hover{
+    /* animation: name duration timing-function delay iteration-count direction fill-mode; */
+    animation-name : kh;
+    animation-duration: 4s;
+    animation-timing-function: linear;
+    animation-delay: 3s;                    /*지연*/
+    animation-iteration-count: 2;    /*반복 /infinite : 무한 반복*/
+    animation-direction: normal;   /*reverse : 거꾸로,alternate :갔다가 다시 돌아오기, alternate-reverse :  거꾸로 갔다가 다시 돌아옴 */
+    animation-fill-mode: both;
+    /*
+        none        : 기본
+        forwards    : 애니메이션 끝나고, 마지막 상태(100%) 유지
+        backwards   : 애니매이션 처음에, 처음 상태(0%) 가짐 //delay 주고 테스트 해야 함
+        both        : forwards, backwards 두 특성을 모두 가짐
+    */
+    /*animation-play-state: paused;*/ /*paused : 멈춤*/
+}
+
+#t02:hover{
+    /* animation-play-state: running; */
+}

@@ -1,0 +1,122 @@
+.box{
+    width:100px;
+    height:100px;
+    border: 1px solid black;
+}
+.gray{
+    background-color: gray;
+}
+
+/* 속성 선택자 */
+
+/* 일치하는 */
+div[name=kh]{
+    background-color: red;
+}
+/* 포함하는 (띄어쓰기 기준 단어 일치)*/
+div[name~=kh]{
+    background-color: blue;
+}
+/* 시작하는 */
+div[name^=k]{
+    background-color: green;
+}
+/* 끝나는 */
+div[name$=h]{
+    background-color: gray;
+}
+/* 포함하는 */
+div[name*=h]{
+    background-color: brown;
+}
+
+/*******************************************/
+
+/* 자식 , 후손 */
+#test1{
+    color:#fff;
+}
+#test1>h4{
+    background-color: red;
+}
+#test1>ul>h4{
+    background-color: blue;
+}
+#test1 li{
+    background-color: green;
+}
+
+/********************************************/
+
+/* 동위 선택자 */
+#test3{
+    background-color: red;
+}
+#test3+div{
+    background-color: blue;
+}
+/* #test3~div{
+    background-color: green;
+} */
+
+/*********************************************/
+/* 반응 선택자 */
+#test-active:active{
+    background-color: aqua;
+}
+
+#test-hover:hover{
+    background-color: purple;
+}
+
+/***********************************************/
+/* 상태 선택자 */
+input[type=checkbox]:checked{
+    width: 100px;
+    height : 100px;
+}
+input[type=text]:focus{
+    background-color: rgb(211, 19, 218);
+}
+button:enabled{
+    background-color: blue; color:#fff;
+}
+button:disabled{
+    border:5px solid green; color: black;
+}
+
+/***********************************************/
+/* 일반 구조 선택자 */
+
+#test6 > p:nth-last-child(1){
+    background-color: red;
+}
+
+/***********************************************/
+/* 형태 구조 선택자 */
+
+#test7{
+    background-color: gray;
+}
+#test7>p:nth-of-type(n){
+    background-color: red;
+}
+
+/***********************************************/
+/* 문자 선택자 - 콜론 2개*/
+#test8>p::selection{
+    background-color: rgb(214, 43, 149);
+    color:#fff;
+}
+#test8>p::after{
+    content: 'abcd';
+    background-color: rgb(214, 43, 149);
+}
+
+/***********************************************/
+/* 부정 선택자 */
+
+#test9 p:not(:nth-child(2)){
+    background-color: red;    
+    color:#fff;
+}

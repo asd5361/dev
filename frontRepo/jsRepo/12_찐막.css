@@ -1,0 +1,16 @@
+aside.aside-left{
+    width: 200px;
+    height: 100vh;
+    background-color: lightgrey;
+    border: 3px solid black;
+    box-sizing: border-box;
+    margin-left: -150px;
+    transition: 0.5s;
+}
+aside.aside-left.active{
+    margin-left: 0;
+}
+button{
+    width: 100%;
+    height: 50px;
+}

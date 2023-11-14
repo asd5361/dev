@@ -1,0 +1,45 @@
+.wrap{
+    width: 600px;
+    height: 600px;
+    border: 5px dotted gray;
+
+    display: grid;
+
+    /* 직접 지정하는 공간 */
+    /* grid-template-rows: repeat(3 , 1fr 100px 200px 1fr); */
+    grid-template-rows: repeat(3 , 1fr);
+    grid-template-columns: repeat(3 , 1fr);
+
+    /* 자동으로 만들어지는 공간 */
+    grid-auto-rows: 300px;
+
+    /* 아이템 정렬 */
+    /* justify-content: center;
+    align-items: center; */
+    place-items: center center;
+
+    /* 컨텐츠 정렬 */
+    justify-content: center;
+    align-content:  center;
+
+    /* 중심축 설정 */
+    grid-auto-flow: row;
+
+    /* 셀 사이 공간 띄우기 */
+    /* row-gap:30px;
+    column-gap:30px; */
+    gap:30px 30px;
+}
+.box{
+    width: 100px;
+    height: 100px;
+    border:1px solid red;
+}
+.box:nth-child(2){
+    background-color: gray;
+    /* grid-row:1/3 ; */
+    grid-column: span 2 ;
+
+    /* place-self: normal normal; */
+    /* order : -3; */
+}
