@@ -28,7 +28,7 @@ public class MemberJoinController extends HttpServlet{
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 	
 		try {
-			req.setCharacterEncoding("UTF-8");
+//			req.setCharacterEncoding("UTF-8");
 			
 			//데이터
 			String memberId = req.getParameter("memberId");
@@ -66,7 +66,7 @@ public class MemberJoinController extends HttpServlet{
 			}
 			
 		}catch(Exception e) {
-			System.out.println("[ERROR-M001] 회언가입 중 에러 발생");
+			System.out.println("[ERROR-M001] 회원가입 중 에러 발생");
 			e.printStackTrace();
 			req.setAttribute("errorMsg", "회원가입");
 			req.getRequestDispatcher("/WEB-INF/views/common/error.jsp").forward(req, resp);

@@ -1,0 +1,22 @@
+main{
+    display: grid;
+    grid-template-rows: 200px 300px 50px 100px;
+    grid-template-columns: 1fr;
+    place-items:center center;
+    text-align: center;
+}
+main table th{
+    padding:15px;
+}
+.page-area{
+    font-size:24px;
+}
+.btn{
+    /* display: flex;
+    justify-self:right; */
+}
+.btn >button{
+    font-size: 15px;
+    width:100px;
+    height: 30px;
+}
