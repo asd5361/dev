@@ -22,32 +22,36 @@
         	<h1> 게시글 목록</h1>
             <div class="tbl">
                 <table>
-                    <tr>
-                        <th>번호</th>
-                        <th>제목</th>
-                        <th>내용</th>
-                        <th>작성자</th>
-                        <th>조회수</th>
-                        <th>작성일시</th>
-                    </tr>
-    <%for(BoardVo vo : boardVoList){ %>
-                    <tr>
-                        <td><%=vo.getNo()%></td>
-                        <td><%=vo.getTitle()%></td>
-                        <td><%=vo.getContent()%></td>
-                        <td><%=vo.getWriteNick()%></td>
-                        <td><%=vo.getHit()%></td>
-                        <td><%=vo.getEnrollDate()%></td>
-                    </tr>
-    <%}%>
+	                <thead>
+	                    <tr>
+	                        <th>번호</th>
+	                        <th>제목</th>
+	                        <th>내용</th>
+	                        <th>작성자</th>
+	                        <th>조회수</th>
+	                        <th>작성일시</th>
+	                        <th>카테고리</th>
+	                    </tr>
+	                </thead>
+                    <tbody>
+<%for(BoardVo vo : boardVoList){ %> 
+	                    <tr>
+	                        <td><%=vo.getNo()%></td>
+	                        <td><%=vo.getTitle()%></td>
+	                        <td><%=vo.getContent()%></td>
+	                        <td><%=vo.getWriteNick()%></td>
+	                        <td><%=vo.getHit()%></td>
+	                        <td><%=vo.getEnrollDate()%></td>
+	                        <td><%=vo.getCategoryName()%></td>
+	                    </tr>
+<% } %>
+                    </tbody>
                 </table>
             </div>
             <div class="btn">
 <% if(loginMember != null) {%>
         		<button type="button" onclick="location.href='/app99/board/write';">작성하기</button>
-<%}else{%>
-				<div></div>
-<%} %>
+<%}%>
         	</div>
 			<div class="page-area">
             	<a href="">1</a>
@@ -58,5 +62,19 @@
          	</div>            	
         </main>
     </div>
+    <script>
+        
+        const trArr = document.querySelectorAll("main div table tbody tr");
+        for(let i=0; i<trArr.length; i++){
+            trArr[i].addEventListener('click',handleClick);
+        }
+        function handleClick(event){
+            const tr = event.currentTarget;
+            const no = tr.children[0].innerText;
+        
+            location.href='/app99/board/detail?no='+no;
+        };
+    
+    </script>
 </body>
 </html>

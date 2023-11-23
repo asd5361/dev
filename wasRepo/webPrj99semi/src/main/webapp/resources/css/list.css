@@ -20,3 +20,7 @@ main table th{
     width:100px;
     height: 30px;
 }
+main> div > table >tbody> tr:hover{
+	background-color: #ccc;
+	cursor: pointer;
+}

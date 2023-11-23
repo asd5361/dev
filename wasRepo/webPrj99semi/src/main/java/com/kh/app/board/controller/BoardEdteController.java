@@ -13,59 +13,68 @@ import com.kh.app.board.service.BoardService;
 import com.kh.app.board.vo.BoardVo;
 import com.kh.app.member.vo.MemberVo;
 
-@WebServlet("/board/write")
-public class BoardIWriteController extends HttpServlet{
-
+@WebServlet("/board/edite")
+public class BoardEdteController extends HttpServlet{
+	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		MemberVo loginMember = (MemberVo)req.getSession().getAttribute("userData");
-		if(loginMember == null) {
-			req.setAttribute("errorMsg", "잘못된 접근입니다. 로그인 후 시도하세요");
+	
+		try {
+			//data
+			String no = req.getParameter("no");
+			
+			//service
+			BoardService bs = new BoardService();
+			BoardVo boardVo = bs.selectBoardByNo(no);
+			
+			//result == view
+			req.setAttribute("boardVo", boardVo);
+			req.getRequestDispatcher("/WEB-INF/views/board/edite.jsp").forward(req, resp);
+			
+		}catch(Exception e) {
+			System.out.println("[ERROR-B002]게시글 수정 데이터 조회 중 에러 발생");
+			e.printStackTrace();
+			req.setAttribute("errorMsg", "게시글 수정 데이터 조회 실패");
 			req.getRequestDispatcher("/WEB-INF/views/common/error.jsp").forward(req, resp);
 		}
-		req.getRequestDispatcher("/WEB-INF/views/board/write.jsp").forward(req, resp);
 		
 	}
+
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 	
 		try {
-			HttpSession session = req.getSession();
-			//데이터
-//			req.setCharacterEncoding("UTF-8");
+			
+			//date
+			String no = req.getParameter("bNo");
 			String title = req.getParameter("title");
 			String content = req.getParameter("content");
 			String categoryNo = req.getParameter("category");
-			
-			MemberVo loginMember = (MemberVo)session.getAttribute("userData");
-			if(loginMember == null) {
-				throw new Exception("로그인 안됨");
-			}
-			String writerNo = loginMember.getMemberNo();
-			
 			BoardVo vo = new BoardVo();
-			vo.setCategoryNo(categoryNo);
+			
+			vo.setNo(no);
 			vo.setTitle(title);
+			vo.setCategoryNo(categoryNo);
 			vo.setContent(content);
-			vo.setWriterNo(writerNo);
 			
-			//서비스
+			
+			//service
 			BoardService bs = new BoardService();
-			int result = bs.write(vo);
+			int result = bs.edite(vo);
 			
-			//결과
-			if(result != 1) {
-				throw new Exception("result가 1이 아님");
+			if(result != 1 ) {
+				throw new Exception("[ERROR-B002]게시글 수정 중 에러 발생");
 			}
-			req.getSession().setAttribute("errorMsg", "게시글이 작성되었습니다.");
-			resp.sendRedirect("/app99/board/list");
+			//resutl == view
+			resp.sendRedirect("/app99/board/detail?no="+no);
 			
 		}catch(Exception e) {
-			
+			System.out.println("[ERROR-B002]게시글 수정 중 에러 발생");
 			e.printStackTrace();
-			req.setAttribute("errorMsg", "게시글 작성 에러 발생");
+			req.setAttribute("errorMsg", "게시글 수정 실패");
 			req.getRequestDispatcher("/WEB-INF/views/common/error.jsp").forward(req, resp);
+		
 		}
 	}
 }
