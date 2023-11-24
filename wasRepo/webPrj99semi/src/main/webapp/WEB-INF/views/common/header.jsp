@@ -34,7 +34,7 @@
     </div>
     <div>
         <nav>
-            <a href="/app99/board/list">게시판</a>
+            <a href="/app99/board/list?pno=1">게시판</a>
             <a href="/app99/notice/list">공지사항</a>
             <a href="/app99/gallery/list">갤러리</a>
             <a href="/app99/member/edit">마이페이지</a>

@@ -8,6 +8,7 @@ import java.util.*;
 
 import com.kh.app.board.vo.BoardVo;
 import com.kh.app.db.util.JDBCTemplate;
+import com.kh.app.page.vo.PageVo;
 
 public class BoardDao {
 
@@ -30,14 +31,18 @@ public class BoardDao {
 		
 	}
 
-	public List<BoardVo> selectBoardList(Connection conn) throws SQLException {
+	public List<BoardVo> selectBoardList(Connection conn, PageVo pvo) throws SQLException {
 		
 		//sql
 //		String sql = "SELECT * FROM BOARD WHERE STATUS = 'O' ORDER BY NO DESC";
 //		String sql = "SELECT B.*, M.NICK FROM BOARD B JOIN MEMBER M ON (B.WRITER_NO= M.NO) WHERE B.STATUS = 'O' ORDER BY B.NO DESC";
 //		String sql ="SELECT * FROM BOARD JOIN(SELECT NO AS M_NO, NICK AS WRITER_NICK FROM MEMBER) ON M_NO = WRITER_NO WHERE STATUS = 'O' ORDER BY NO DESC";
-		String sql ="SELECT * FROM BOARD JOIN(SELECT NO AS M_NO, NICK AS WRITER_NICK FROM MEMBER) ON M_NO = WRITER_NO JOIN (SELECT NO AS C_NO,NAME AS NAME FROM CATEGORY) ON  CATEGORY_NO = C_NO WHERE STATUS = 'O' ORDER BY NO DESC";
+//		String sql ="SELECT * FROM BOARD JOIN(SELECT NO AS M_NO, NICK AS WRITER_NICK FROM MEMBER) ON M_NO = WRITER_NO JOIN (SELECT NO AS C_NO,NAME AS NAME FROM CATEGORY) ON  CATEGORY_NO = C_NO WHERE STATUS = 'O' ORDER BY NO DESC";
+		String sql = "SELECT * FROM ( SELECT ROWNUM AS RNUM, T.* FROM( SELECT * FROM BOARD JOIN(SELECT NO AS M_NO, NICK AS WRITER_NICK FROM MEMBER) ON M_NO = WRITER_NO JOIN (SELECT NO AS C_NO,NAME AS NAME FROM CATEGORY) ON  CATEGORY_NO = C_NO WHERE STATUS = 'O' ORDER BY NO DESC ) T ) WHERE RNUM BETWEEN ? AND ?";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
+		
+		pstmt.setInt(1, pvo.getStartRow());
+		pstmt.setInt(2, pvo.getLastRow());
 		ResultSet rs = pstmt.executeQuery();
 		
 		List<BoardVo> boardVoList = new ArrayList<BoardVo>();
@@ -170,6 +175,25 @@ public class BoardDao {
 		JDBCTemplate.close(pstmt);
 		
 		return result;
+	}
+
+	public int selectBoardCount(Connection conn) throws SQLException {
+		
+		//sql
+		String sql = "SELECT COUNT(*) FROM BOARD WHERE STATUS = 'O'";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		ResultSet rs = pstmt.executeQuery();
+		
+		//rs
+		int cnt = 0;
+		if(rs.next()) {
+			cnt = rs.getInt(1);
+		}
+		//close
+		JDBCTemplate.close(rs);
+		JDBCTemplate.close(pstmt);
+		
+		return cnt ; 
 	}
 
 }

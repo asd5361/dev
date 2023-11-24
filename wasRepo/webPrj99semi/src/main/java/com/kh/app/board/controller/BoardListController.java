@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.kh.app.board.service.BoardService;
 import com.kh.app.board.vo.BoardVo;
+import com.kh.app.page.vo.PageVo;
 
 @WebServlet("/board/list")
 public class BoardListController extends HttpServlet{
@@ -20,16 +21,24 @@ public class BoardListController extends HttpServlet{
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
 		try {
-			//data
-			//service
 			BoardService bs = new BoardService();
-			List<BoardVo> boardVoList = bs.selectBoardList();
+			
+			//data
+			int listCount = bs.selectBoardCount();						//전체 게시글 갯수 
+			int currentPage = Integer.parseInt(req.getParameter("pno"));//현제 페이지
+			int pageLimit = 5;
+			int boardLimit = 10;
+			PageVo pvo = new PageVo(listCount, currentPage, pageLimit, boardLimit);
+			
+			//service
+			List<BoardVo> boardVoList = bs.selectBoardList(pvo);
 			
 			if(boardVoList == null) {
 				throw new Exception("[ERROR-B001]게시글 목록 조회 중 에러 발생");
 			}
 			//결과
 			req.setAttribute("boardVoList", boardVoList);
+			req.setAttribute("pageVo", pvo);
 			req.getRequestDispatcher("/WEB-INF/views/board/list.jsp").forward(req, resp);
 
 		}catch(Exception e) {
