@@ -6,6 +6,7 @@
 <%
 	List<BoardVo> boardVoList = (List<BoardVo>) request.getAttribute("boardVoList");
 	PageVo pvo = (PageVo)request.getAttribute("pageVo"); 
+	int next = 0;
 %>
 <!DOCTYPE html>
 <html>
@@ -56,11 +57,14 @@
 <%}%>
         	</div>
 			<div class="page-area">
-            	<a href="/app99/board/list?pno=1">1</a>
-            	<a href="/app99/board/list?pno=2">2</a>
-           		<a href="/app99/board/list?pno=3">3</a>
-            	<a href="/app99/board/list?pno=4">4</a>
-            	<a href="/app99/board/list?pno=5">5</a>
+				<%if(pvo.getStartPage() != 1) {%><a href="/app99/board/list?pno=<%=pvo.getStartPage()-1%>">이전</a><% }%>
+<% for(int i =pvo.getStartPage(); i<= pvo.getEndPage(); i++){%>
+	<%if(i == pvo.getCurrentPage()) {%>
+				<span style="color:red"><%= i%></span>
+	<% }else{%>
+            	<a href="/app99/board/list?pno=<%=i%>"><%=i%></a>
+<% } }%>
+         		<%if(pvo.getEndPage() != pvo.getMaxPage() ) {%><a href="/app99/board/list?pno=<%=pvo.getEndPage()+1%>">다음</a><% }%>
          	</div>            	
         </main>
     </div>
@@ -74,7 +78,7 @@
             const tr = event.currentTarget;
             const no = tr.children[0].innerText;
         
-            location.href='/app99/board/detail?no='+no;
+            location.href='/app99/board/detail?no='+no + '&currPage=<%= pvo.getCurrentPage() %>';
         };
     
     </script>

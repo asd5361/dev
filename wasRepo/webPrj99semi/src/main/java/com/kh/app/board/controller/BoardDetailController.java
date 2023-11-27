@@ -31,6 +31,7 @@ public class BoardDetailController extends HttpServlet{
 			}
 			
 			req.setAttribute("boardVo", boardVo);
+			req.setAttribute("currPage", req.getParameter("currPage"));
 			req.getRequestDispatcher("/WEB-INF/views/board/detail.jsp").forward(req, resp);
 		
 		}catch(Exception e) {

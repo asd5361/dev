@@ -3,6 +3,7 @@
     pageEncoding="UTF-8"%>
 <%
 	BoardVo boardVo = (BoardVo)request.getAttribute("boardVo");
+	String currPage = (String)request.getAttribute("currPage");
 
 %>
 <!DOCTYPE html>
@@ -64,6 +65,7 @@
         		<button type="button" onclick="location.href='/app99/board/edite?no=<%=boardVo.getNo()%>';">수정하기</button>
 				<button type="button" onclick="location.href='/app99/board/delete?no=<%=boardVo.getNo()%>';">삭제하기</button>
 <%}%>	
+				<a href="/app99/board/list?pno=<%=currPage%>">목록 가기</a>
         	</div>
        	</main>
      </div>

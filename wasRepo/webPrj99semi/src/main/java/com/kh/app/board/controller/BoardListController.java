@@ -22,10 +22,14 @@ public class BoardListController extends HttpServlet{
 
 		try {
 			BoardService bs = new BoardService();
-			
+		
 			//data
-			int listCount = bs.selectBoardCount();						//전체 게시글 갯수 
-			int currentPage = Integer.parseInt(req.getParameter("pno"));//현제 페이지
+			String currentPage_ = req.getParameter("pno");
+			if(currentPage_ == null) {
+				currentPage_ = "1";
+			}
+			int listCount = bs.selectBoardCount();				//전체 게시글 갯수 
+			int currentPage = Integer.parseInt(currentPage_);	//현제 페이지
 			int pageLimit = 5;
 			int boardLimit = 10;
 			PageVo pvo = new PageVo(listCount, currentPage, pageLimit, boardLimit);
