@@ -1,0 +1,30 @@
+--삭제
+DROP TABLE ADMIN CASCADE CONSTRAINTS;  
+--생성
+CREATE TABLE ADMIN (
+	ADMIN_NO	    NUMBER	        PRIMARY KEY
+	,ADMIN_ID	    VARCHAR2(20)	NOT NULL	                
+	,ADMIN_PWD	    VARCHAR2(20)	NOT NULL	                
+	,ADMIN_NAME	    VARCHAR2(20)		                    
+	,QUIT_YN	    CHAR(1)	        DEFAULT 'N'	        
+    ,ENROLL_DATE	TIMESTAMP	    DEFAULT SYSDATE	    
+);
+---------------------코멘트--------------------
+COMMENT ON COLUMN "ADMIN"."ADMIN_NO" IS '관리자 번호 "PK"';
+COMMENT ON COLUMN "ADMIN"."ADMIN_ID" IS '관리자 아이디';
+COMMENT ON COLUMN "ADMIN"."ADMIN_PWD" IS '비밀번호';
+COMMENT ON COLUMN "ADMIN"."ADMIN_NAME" IS '관리자명';
+COMMENT ON COLUMN "ADMIN"."QUIT_YN" IS '탈퇴여부';
+COMMENT ON COLUMN "ADMIN"."ENROLL_DATE" IS '가입일자';
+
+---------------------시퀀스--------------------
+--ADMIN
+DROP SEQUENCE SEQ_ADMIN;
+CREATE SEQUENCE SEQ_ADMIN NOCYCLE NOCACHE;
+--SEQ_ADMIN.NEXTVAL;
+
+---------------------더미데이터--------------------
+INSERT INTO ADMIN(ADMIN_NO,ADMIN_ID,ADMIN_PWD,ADMIN_NAME) VALUES (SEQ_ADMIN.NEXTVAL,'ADMIN01','1234','초기관리자');
+
+commit;
+
