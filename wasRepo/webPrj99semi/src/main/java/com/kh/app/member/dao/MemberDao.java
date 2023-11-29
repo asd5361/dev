@@ -67,4 +67,25 @@ public class MemberDao {
 		
 		return loginMember;
 	}
+
+	public boolean checkIdDup(Connection conn, String memberId) throws SQLException {
+		
+		//sql
+		String sql = "SELECT ID FROM MEMBER WHERE ID = ?";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, memberId);
+		ResultSet rs = pstmt.executeQuery();
+		
+		//rs
+		Boolean result = true;
+		if(rs.next()) {
+			result = false;
+		}
+		
+		//close
+		JDBCTemplate.close(rs);
+		JDBCTemplate.close(pstmt);
+		
+		return result;
+	}
 }

@@ -19,6 +19,7 @@
                     <tr>
                         <td>* 아이디</td>
                         <td><input type="text" name="memberId"></td>
+                        <td><input type="button" value="중복확인" onclick='chekIdDup();'></td>
                     </tr>
                     <tr>
                         <td>* 비밀번호</td>
@@ -64,8 +65,14 @@
         </main>
     </div>
     <script>
+   		
         function checkValidate(){
-            
+            //중복 검사 통과 여부
+            if(!window.idOk){
+            	alert("아이디 중복 검사를 완료하세요");
+                document.querySelector("main input[name=memberId]").focus();
+                return false;
+            }
             //아이디 길이
             const memberId = document.querySelector("main input[name=memberId]").value;
             const memverIdRegex = /^[a-z0-9]{4,12}$/;
@@ -122,6 +129,30 @@
             return true;
 
         }
+        
+        
+        //아이디 중복체크
+        function chekIdDup(){
+        	const memberIdvalue = document.querySelector("main input[name=memberId]").value;
+        	
+        	fetch("/app99/member/check/id?memberId="+memberIdvalue)
+        	.then((resp)=>{return resp.json()})
+        	.then((data)=>{
+        		const result = data.msg;
+        		const isOk = result === "ok";
+        		if(isOk){
+        			alert("사용가능");
+        			window.idOk = true;
+        		}else{
+                    alert("사용불가");
+        			window.idOk = false;
+        		}
+        	})
+
+        	
+        	
+        }
+        
     </script>
 </body>
 </html>

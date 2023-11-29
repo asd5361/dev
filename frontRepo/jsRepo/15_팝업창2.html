@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>부모창 -> 자식창 값 보내기</h1>
+    <input type="text" name="nick">
+    <button  onclick="opnePopup();">닉네임 중복 검사</button>
+
+
+
+</body>
+</html>
+<script>
+    function opnePopup(){
+        const childWindow = window.open("/15_팝업창2_자식.html","팝업창입니다.",'width=500,height=500');
+        const inputTag = document.querySelector('input[name=nick]');
+        
+        //팝업이 생기기 전에 js 먼저 작동해서 setTimeout으로 순서 조정
+        setTimeout(() => {
+            const childInputTag = childWindow.document.querySelector('input[name=nick]');
+            childInputTag.value = inputTag.value;
+            
+        }, 100);
+
+    }
+
+</script>

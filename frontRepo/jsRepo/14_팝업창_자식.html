@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>닉네임 검사하는 팝업창</h1>
+    <input type="text" name="nick">
+    <button onclick="checkNickDup();">닉네임 중복 검사</button>
+
+    <script>
+        function checkNickDup(){
+            const parentInputTag = window.opener.document.querySelector("input[name=nick]");
+            //서버에 닉네임을 넘기며, 중복검사 요청 진행
+            //응답결과 받아옴~~
+            //했다고 치고 사용 가능한 닉네임이라고 진행함.
+
+            //원래 창(부모창)에다가 닉네임 전달
+            const nickInputTag = window.document.querySelector("input[name=nick]");
+            parentInputTag.value =nickInputTag.value;
+
+            //현재창 닫기
+            window.close();
+            
+        }
+
+    </script>
+</body>
+</html>
