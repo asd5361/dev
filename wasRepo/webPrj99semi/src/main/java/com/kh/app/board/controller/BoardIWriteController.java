@@ -1,6 +1,8 @@
 package com.kh.app.board.controller;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,6 +13,7 @@ import javax.servlet.http.HttpSession;
 
 import com.kh.app.board.service.BoardService;
 import com.kh.app.board.vo.BoardVo;
+import com.kh.app.board.vo.CategoryVo;
 import com.kh.app.member.vo.MemberVo;
 
 @WebServlet("/board/write")
@@ -18,13 +21,24 @@ public class BoardIWriteController extends HttpServlet{
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		MemberVo loginMember = (MemberVo)req.getSession().getAttribute("userData");
-		if(loginMember == null) {
+		try {
+			MemberVo loginMember = (MemberVo)req.getSession().getAttribute("userData");
+			if(loginMember == null) {
+				throw new Exception();
+			}
+			
+			//service
+			BoardService bs = new BoardService();
+			List<CategoryVo> categoryVoList = bs.getCategoryList();
+			
+			req.setAttribute("categoryVoList",categoryVoList ); 
+			req.getRequestDispatcher("/WEB-INF/views/board/write.jsp").forward(req, resp);
+			
+		}catch(Exception e){
+			e.printStackTrace();
 			req.setAttribute("errorMsg", "잘못된 접근입니다. 로그인 후 시도하세요");
 			req.getRequestDispatcher("/WEB-INF/views/common/error.jsp").forward(req, resp);
 		}
-		req.getRequestDispatcher("/WEB-INF/views/board/write.jsp").forward(req, resp);
-		
 	}
 	
 	@Override
@@ -58,6 +72,7 @@ public class BoardIWriteController extends HttpServlet{
 			if(result != 1) {
 				throw new Exception("result가 1이 아님");
 			}
+			
 			req.getSession().setAttribute("errorMsg", "게시글이 작성되었습니다.");
 			resp.sendRedirect("/app99/board/list");
 			

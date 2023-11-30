@@ -1,10 +1,11 @@
 package com.kh.app.board.service;
 
 import java.sql.*;
-import java.util.List;
+import java.util.*;
 
 import com.kh.app.board.dao.BoardDao;
 import com.kh.app.board.vo.BoardVo;
+import com.kh.app.board.vo.CategoryVo;
 import com.kh.app.db.util.JDBCTemplate;
 import com.kh.app.page.vo.PageVo;
 
@@ -48,7 +49,7 @@ public class BoardService {
 		
 		//dao
 		BoardDao dao = new BoardDao();
-		int result = dao.increaesHit(conn, boardNo);
+		int result = dao.increaesHit(conn, boardNo); //조회수 증가
 		
 		BoardVo vo = null;
 		if(result == 1) {
@@ -63,15 +64,34 @@ public class BoardService {
 		
 		return vo;
 	}
-
-	public int edite(BoardVo vo) throws Exception {
+	//게시글 수정 (화면)
+	public Map<String, Object> edit(String no) throws Exception {
 		
 		//conn
 		Connection conn = JDBCTemplate.getConnection();
 		
 		//dao
 		BoardDao dao = new BoardDao();
-		int result = dao.edite(conn,vo);
+		BoardVo vo = dao.selectBoardByNo(conn, no);
+		List<CategoryVo> categoryVoList = dao.getCategoryList(conn);
+		Map<String, Object> m = new HashMap<String, Object>();
+		m.put("vo", vo);
+		m.put("categoryVoList", categoryVoList);
+		
+		//close
+		JDBCTemplate.close(conn);
+		
+		return m;
+	}
+
+	public int updateBoardByNo(BoardVo vo) throws Exception {
+		
+		//conn
+		Connection conn = JDBCTemplate.getConnection();
+		
+		//dao
+		BoardDao dao = new BoardDao();
+		int result = dao.updateBoardByNo(conn,vo);
 		
 		//tx
 		if(result == 1) {
@@ -121,6 +141,20 @@ public class BoardService {
 		JDBCTemplate.close(conn);
 		
 		return cnt;
+	}
+	//카테고리 조회
+	public List<CategoryVo> getCategoryList() throws Exception{
+		//conn
+		Connection conn = JDBCTemplate.getConnection();
+		
+		//dao
+		BoardDao dao = new BoardDao();
+		List<CategoryVo> voList = dao.getCategoryList(conn);
+		
+		//close
+		JDBCTemplate.close(conn);
+		
+		return voList;
 	}
 
 }

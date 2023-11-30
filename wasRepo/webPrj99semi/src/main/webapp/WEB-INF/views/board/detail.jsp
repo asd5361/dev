@@ -62,12 +62,20 @@
             <div class="btn">
             	<!-- <button type="button" onclick="history.back();">뒤로가기</button> -->
 <% if(loginMember != null && loginMember.getMemberNo().equals(boardVo.getWriterNo())) { %>   		
-        		<button type="button" onclick="location.href='/app99/board/edite?no=<%=boardVo.getNo()%>';">수정하기</button>
+        		<button type="button" onclick="location.href='/app99/board/edit?no=<%=boardVo.getNo()%>';">수정하기</button>
 				<button type="button" onclick="location.href='/app99/board/delete?no=<%=boardVo.getNo()%>';">삭제하기</button>
-<%}%>	
+<%}%>
 				<a href="/app99/board/list?pno=<%=currPage%>">목록 가기</a>
         	</div>
        	</main>
      </div>
+<script>
+	const urlStr = location.href;
+	const idx = urlStr.indexOf("no=");
+	const boardNo = urlStr.substr(idx);	//no=123
+	const aTag = document.querySelector("main div a");
+	aTag.href = aTag.href.replace("no=null" , no);
+
+</script>
 </body>
 </html>

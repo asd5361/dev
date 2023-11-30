@@ -1,6 +1,8 @@
 package com.kh.app.board.controller;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,10 +14,12 @@ import javax.servlet.http.HttpSession;
 import com.kh.app.board.service.BoardService;
 import com.kh.app.board.vo.BoardVo;
 import com.kh.app.member.vo.MemberVo;
+import com.kh.app.board.vo.CategoryVo;
 
-@WebServlet("/board/edite")
-public class BoardEdteController extends HttpServlet{
+@WebServlet("/board/edit")
+public class BoardEdtController extends HttpServlet{
 	
+	//게시글 수정 (화면)
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 	
@@ -25,22 +29,33 @@ public class BoardEdteController extends HttpServlet{
 			
 			//service
 			BoardService bs = new BoardService();
-			BoardVo boardVo = bs.selectBoardByNo(no);
+			Map<String, Object> m = bs.edit(no);
+			BoardVo vo = (BoardVo) m.get("vo");
+			List<CategoryVo> categoryVoList = (List<CategoryVo>) m.get("categoryVoList");
 			
 			//result == view
-			req.setAttribute("boardVo", boardVo);
-			req.getRequestDispatcher("/WEB-INF/views/board/edite.jsp").forward(req, resp);
+			if(vo == null) {
+				throw new Exception();
+			}
+			
+			//카테고리 정보
+			req.setAttribute("boardVo", vo); 
+			
+			//조회한 게시글 정보
+			req.setAttribute("categoryVoList",categoryVoList ); 
+			
+			req.getRequestDispatcher("/WEB-INF/views/board/edit.jsp").forward(req, resp);
 			
 		}catch(Exception e) {
-			System.out.println("[ERROR-B002]게시글 수정 데이터 조회 중 에러 발생");
+			System.out.println("게시글 수정하기 화면 조회 에러 발생");
 			e.printStackTrace();
-			req.setAttribute("errorMsg", "게시글 수정 데이터 조회 실패");
+			req.setAttribute("errorMsg", "게시글 수정 화면 조회 실패");
 			req.getRequestDispatcher("/WEB-INF/views/common/error.jsp").forward(req, resp);
 		}
 		
 	}
 
-	
+	//게시글 수정
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 	
@@ -61,7 +76,7 @@ public class BoardEdteController extends HttpServlet{
 			
 			//service
 			BoardService bs = new BoardService();
-			int result = bs.edite(vo);
+			int result = bs.updateBoardByNo(vo);
 			
 			if(result != 1 ) {
 				throw new Exception("[ERROR-B002]게시글 수정 중 에러 발생");
@@ -70,7 +85,6 @@ public class BoardEdteController extends HttpServlet{
 			resp.sendRedirect("/app99/board/detail?no="+no);
 			
 		}catch(Exception e) {
-			System.out.println("[ERROR-B002]게시글 수정 중 에러 발생");
 			e.printStackTrace();
 			req.setAttribute("errorMsg", "게시글 수정 실패");
 			req.getRequestDispatcher("/WEB-INF/views/common/error.jsp").forward(req, resp);
