@@ -1,6 +1,6 @@
 main{
     display: grid;
-    grid-template-rows: 200px 300px 50px 100px;
+    grid-template-rows: 150px 50px 300px 50px 100px;
     grid-template-columns: 1fr;
     place-items:center center;
     text-align: center;

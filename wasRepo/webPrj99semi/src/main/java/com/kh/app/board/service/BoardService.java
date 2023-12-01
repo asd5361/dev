@@ -157,4 +157,32 @@ public class BoardService {
 		return voList;
 	}
 
+	//게시글 검색 기능
+	public List<BoardVo> search(Map<String, String> m, PageVo pvo) throws Exception {
+		
+		//conn
+		Connection conn = JDBCTemplate.getConnection();
+		
+		//dao
+		BoardDao dao = new BoardDao();
+		List<BoardVo> voList = dao.search(conn, m, pvo);
+		
+		//close
+		JDBCTemplate.close(conn);
+		
+		return voList;
+	}
+
+	public int selectSearchBoardCount(Map<String, String> m) throws Exception {
+		//conn
+		Connection conn = JDBCTemplate.getConnection();
+		
+		//dao
+		BoardDao dao = new BoardDao();
+		int cnt = dao.getBoardCountBySearch(conn,m);
+		
+		//close
+		return cnt;
+	}
+
 }
