@@ -43,5 +43,5 @@ const p1 = new Person('~~',20);
 console.log(p1);
 p1.hello();
 
-
-Person.prototype.hello();
+const result = Object.getOwnPropertyNames(p1.__proto__.__proto__); //p1에 있는 모든 propote를 가져와서 배열로 만들어준다.
+console.log(result);
