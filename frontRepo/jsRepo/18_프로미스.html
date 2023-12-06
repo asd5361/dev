@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>프로미스</h1>
+    <!--
+        callbaok 함수 땜에 사용함
+        
+
+    -->
+    <script>
+/*
+        const p1 = new Promise(() => {
+            setTimeout(()={
+                console.log("서버에 가서 데이터 받아오는 작업 진행"); 
+
+            },3000);
+           alert("성공!!");
+        });
+            서버에 보내기만 하고 알람 먼저 실행 시킴. setTimeout을 사용해보면 3초 뒤에 작업은 나중으로 미루고 다음 줄인 알람부터 출력됨.  
+           (서버에서 받아 오는 작업 전에 다음 로직이 실행됨.) 
+            이런 부분을 콜백을 써야 하는데 지저분해지기 때문에 프로미스를 사용한다.
+            (요약 : 비동기 처리로 인해 시간이 걸리는 작업이 순차적으로 흘러가지 않기 때문에 콜백함수를 써야하는데 
+            콜백함수는 화면에 지저분해지기 때문에 프로미스를 써서 한다.)
+        
+*/
+/*
+        const p1 = new Promise((f01,f02)=>{ //f01 성공함수 , f02 실패함수
+            setTimeout(()=>{
+                console.log("서버에 가서 데이터 받아오는 작업 진행");
+                f02();
+            },3000);
+        });
+        
+        p1.then(()=>{       //성공할 때 호출
+            console.log("성공"); //이 함수는 성공했을 때 동작
+        });
+        p1.catch(()=>{       //실패할 때 호출
+            console.log("실패");
+        });
+
+프로미스는 내부적으로 상태값을 가지고 있다. 이 상태값을 바꿔주는게 가능하다. 
+프로미스가 실행하고 있는 함수의 파라미터 함수(f01,f02) 호출로 상태값 변경이 가능하다.
+*/
+        new Promise( ( resolve, reject )=>{
+            console.log("할일");
+            resolve();  // reject()  작업 상태 변경
+        } )
+        .then(()=>{
+            console.log("hello~~");
+        } )
+        .catch(()=>{
+            console.log("bey~~");
+        } )
+        ;
+/*
+상태값을 바꾸는 함수가 실행 될 때 객체를 담아서 전달 할 수 있다. resolve(데이터);
+*/
+        const str = "홍길동";
+        const age = 20;
+        console.log(`1: ${str} 2: ${age}`);
+
+    </script>
+
+</body>
+</html>

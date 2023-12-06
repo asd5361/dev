@@ -1,21 +1,25 @@
-<!-- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TODO_LIST</title>
+    <style>
+        .done{
+            text-decoration: line-through;
+        }
+    </style>
 </head>
 <body>
     <h1>오늘 할 일</h1>
-        <input type="text" id="target"placeholder="할 일을 입력하세요">
+        <input id="target" type="text" placeholder="할 일을 입력하세요">
+        <button onclick="addTodo();">등록</button>
 
-    <button onclick="addTodo();">등록</button>
     <br><br><br>
 
     <div id="result"></div>
 
-</body>
-</html>
+
 <script>
 
     function getSeqNo(){
@@ -51,26 +55,31 @@
 
         const todoArr = getTodoArr();
 
-        for(let i = 0 ; i < todoArr.length; i++){
+        for(let i = 0 ; i < todoArr.length; ++i){
             const todoObj = todoArr[i];
 
             const divTag = document.createElement("div");
             const h3Tag = document.createElement("h3");
+            if(todoObj.done){
+                h3Tag.classList.add("done");
+            }
             const btnTag = document.createElement("button");
             const btn2Tag = document.createElement("button");
             const hrTag = document.createElement("hr");
             h3Tag.innerHTML = todoObj.title;
             divTag.appendChild(h3Tag);
             btnTag.innerHTML = "완료";
+            btnTag.addEventListener("click" , ()=>{
+                    toggleDone(todoObj.no);
+            });
             btn2Tag.innerHTML = "삭제";
-            divTag.appendChild(btnTag);
-            divTag.appendChild(btn2Tag);
             btn2Tag.addEventListener('click',()=>{
                 removeTodo(todoObj.no);
             });
+            divTag.appendChild(btnTag);
+            divTag.appendChild(btn2Tag);
             result.appendChild(divTag);
             result.appendChild(hrTag);
-
 
         }
     }
@@ -78,18 +87,17 @@
     function getTodoArr(){
         //데이터(문자열) 읽어와서 객체배열로 만들기
         let todoListStr = localStorage.getItem("todoList");
-        console.log(todoListStr);
-        if(todoListStr ===''){
-            todoListStr = '';
+        if(!todoListStr){
+            todoListStr = "[]";
         }
-        console.log(todoListStr);
         const todoArr = JSON.parse(todoListStr);
         return todoArr;
     }
 
     function removeTodo(no){
+
         //객체 배열 가져오기
-        let todoArr = getTodoArr();
+        const todoArr = getTodoArr();
 
         //특정 요소(객체) 삭제
         for(let i=0; i< todoArr.length; ++i){
@@ -101,9 +109,9 @@
         }
         
         //로컬 스토리지 최신화
-        localStorage.setItem("todoList", JSON.parse(todoListStr));
+        localStorage.setItem("todoList", JSON.stringify(todoArr));
 
-        //화면 다시 그리기 
+        //화면 그리기 
         paintView();
 
     }
@@ -116,13 +124,13 @@
         for(let i=0; i< todoArr.length; ++i){
             const todoObj = todoArr[i];
             if(todoObj.no === no){
-                todoArr.done = true;
+                todoObj.done = true;
                 break;
             }
         }
         
         //로컬 스토리지 최신화
-        localStorage.setItem("todoList", JSON.parse(todoListStr));
+        localStorage.setItem("todoList", JSON.stringify(todoArr));
 
         //화면 다시 그리기 
         paintView();
@@ -130,160 +138,7 @@
     }
     //처음에 화면 그려주기
     paintView();
-//오류 남 밑에 건 답지
-</script> -->
 
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-
-    <style>
-        .done{
-            text-decoration: line-through;
-        }
-    </style>
-
-</head>
-<body>
-
-    <h1>오늘 할 일</h1>
-    
-    <input id="target" type="text" placeholder="할일을 입력하세요">
-    <button onclick="addTodo();">등록</button>
-
-    <br><br><br>
-
-    <div id="result">
-
-    </div>
-
-
-    <script>
-
-        function getSeqNo(){
-            let no = localStorage.getItem("seqNo");
-            if(!no){
-                no = 1;
-            }
-            no = parseInt(no); 
-            localStorage.setItem("seqNo" , no+1);
-            return no;
-        }
-
-        function addTodo(){
-            const todoArr = getTodoArr();
-            
-            const target = document.querySelector("#target");
-            const todoObj = {
-                no : getSeqNo() ,
-                title : target.value ,
-                done : false ,
-            };
-            todoArr.push(todoObj);
-            localStorage.setItem("todoList" , JSON.stringify(todoArr) );
-            paintView();
-        }
-
-        function paintView(){
-
-            //기존 내용 지우기
-            const result = document.querySelector("#result");
-            result.innerHTML = "";
-
-            const todoArr = getTodoArr();
-
-            for(let i = 0 ; i < todoArr.length; ++i){
-                const todoObj = todoArr[i];
-
-                const divTag = document.createElement("div");
-                const h3Tag = document.createElement("h3");
-                if(todoObj.done){
-                    h3Tag.classList.add("done");
-                }
-                const btnTag = document.createElement("button");
-                const btnTag2 = document.createElement("button");
-                const hrTag = document.createElement("hr");
-                h3Tag.innerHTML = todoObj.title;
-                divTag.appendChild(h3Tag);
-                btnTag.innerHTML = "완료";
-                btnTag.addEventListener("click" , ()=>{
-                    toggleDone(todoObj.no);
-                });
-                btnTag2.innerHTML = "삭제";
-                btnTag2.addEventListener('click' , ()=>{
-                    removeTodo(todoObj.no)
-                });
-                divTag.appendChild(btnTag);
-                divTag.appendChild(btnTag2);
-                result.appendChild(divTag);
-                result.appendChild(hrTag);
-
-            }
-
-            
-        }
-
-        function getTodoArr(){
-            //데이터(문자열) 읽어와서 객체배열로 만들기
-            let todoListStr = localStorage.getItem("todoList");
-            if(!todoListStr){
-                todoListStr = "[]";
-            }
-            const todoArr = JSON.parse(todoListStr);
-            return todoArr;
-        }
-
-        
-
-        function removeTodo(no){
-            
-            // 객체 배열 가져오기
-            const todoArr = getTodoArr();
-
-            // 특정 요소(객체) 삭제
-            for(let i = 0; i < todoArr.length; ++i){
-                const todoObj = todoArr[i];
-                if(todoObj.no === no){
-                    todoArr.splice(i,1);
-                    break;
-                }
-            }
-
-            // 로컬 스토리지 최신화
-            localStorage.setItem("todoList" , JSON.stringify(todoArr));
-
-            // 화면 그리기
-            paintView();
-
-        }
-
-        function toggleDone(no){
-            const todoArr = getTodoArr();
-
-             // 특정 요소(객체) 수정
-             for(let i = 0; i < todoArr.length; ++i){
-                const todoObj = todoArr[i];
-                if(todoObj.no === no){
-                    todoObj.done = true;
-                    break;
-                }
-            }
-
-            // 로컬 스토리지 최신화
-            localStorage. setItem("todoList" , JSON.stringify(todoArr));
-
-            // 화면 다시 그리기
-            paintView();
-        }
-
-        //처음에 화면 그려주기
-        paintView();
-
-    </script>
-
-
+</script>
 </body>
 </html>
