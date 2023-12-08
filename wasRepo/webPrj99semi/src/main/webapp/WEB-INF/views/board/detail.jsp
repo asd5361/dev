@@ -1,9 +1,13 @@
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@page import="com.kh.app.reply.vo.ReplyVo"%>
+<%@page import="java.util.List"%>
 <%@page import="com.kh.app.board.vo.BoardVo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
 	BoardVo boardVo = (BoardVo)request.getAttribute("boardVo");
 	String currPage = (String)request.getAttribute("currPage");
+	List<ReplyVo> replyVoList = (List<ReplyVo>)request.getAttribute("replyVoList");
 	if(currPage == null) currPage = "1";
 %>
 <!DOCTYPE html>
@@ -66,9 +70,14 @@
 				<button type="button" onclick="location.href='/app99/board/delete?no=<%=boardVo.getNo()%>';">삭제하기</button>
 <%}%>
 				<a href="/app99/board/list?pno=<%=currPage%>">목록 가기</a>
+				<h3>댓글 내용 :::${replyVoList}</h3>
+				<div id ="replyArea" ></div>
+				
+				</div>
         	</div>
        	</main>
      </div>
+     
 <script>
 	const urlStr = location.href;
 	const idx = urlStr.indexOf("no=");
@@ -76,6 +85,21 @@
 	const aTag = document.querySelector("main div a");
 	aTag.href = aTag.href.replace("no=null" , no);
 
+	//ajax를 이용하여 댓글 목록 조회
+	function getReplyList(refNo){
+		fetch("/app99/board/reply/list?no=1")
+		.then((resp)=>{ return resp.json() })
+		.then((data)=>{ console.log(replyVoList) })
+		.catch(()=>{ alert("댓글 불러오기 실패"); });
+	}
+	
+	//댓글 목록들을 화면에 보여주기
+	function setReplyArea() {
+		const divTap = document.querySelector("#replyArea");
+		const replyVoList = getReplyList(1);
+		divTap.innerHTML = replyVoList;
+	}
+	
 </script>
 </body>
 </html>

@@ -8,6 +8,7 @@ import com.kh.app.board.vo.BoardVo;
 import com.kh.app.board.vo.CategoryVo;
 import com.kh.app.db.util.JDBCTemplate;
 import com.kh.app.page.vo.PageVo;
+import com.kh.app.reply.vo.ReplyVo;
 
 public class BoardService {
 
@@ -42,16 +43,18 @@ public class BoardService {
 		
 		return boardVoList;
 	}
-
-	public BoardVo selectBoardByNo(String boardNo) throws Exception {
+	//게시글 상세 조회
+	public Map<String,Object> selectBoardByNo(String boardNo) throws Exception {
 		//conn
 		Connection conn = JDBCTemplate.getConnection();
 		
 		//dao
 		BoardDao dao = new BoardDao();
 		int result = dao.increaesHit(conn, boardNo); //조회수 증가
-		
 		BoardVo vo = null;
+		
+//ajax처리	List<ReplyVo> replyVoList = dao.getReList(conn, boardNo);
+		
 		if(result == 1) {
 			vo = dao.selectBoardByNo(conn, boardNo);
 			JDBCTemplate.commit(conn);
@@ -59,10 +62,14 @@ public class BoardService {
 			JDBCTemplate.rollback(conn);
 		}
 		
+		Map<String,Object> map = new HashMap<String, Object>();
+		map.put("vo",vo);
+//		map.put("replyVoList",replyVoList);
+		
 		//close
 		JDBCTemplate.close(conn);
 		
-		return vo;
+		return map;
 	}
 	//게시글 수정 (화면)
 	public Map<String, Object> edit(String no) throws Exception {
@@ -88,7 +95,6 @@ public class BoardService {
 		
 		//conn
 		Connection conn = JDBCTemplate.getConnection();
-		
 		//dao
 		BoardDao dao = new BoardDao();
 		int result = dao.updateBoardByNo(conn,vo);

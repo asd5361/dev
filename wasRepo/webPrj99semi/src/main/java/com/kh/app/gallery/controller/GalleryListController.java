@@ -24,17 +24,15 @@ public class GalleryListController extends HttpServlet{
 		try {
 			
 			//data
-			GalleryVo vo = new GalleryVo();
 			
 			//service
 			GalleryService gs = new GalleryService();
 			List<GalleryVo> galleryVoList = gs.getGalleryList();
 			
-			//result
-			
-			if(galleryVoList == null) {
-				throw new Exception();
+			for (GalleryVo galleryVo : galleryVoList) {
+				System.out.println(galleryVo);
 			}
+			//result
 			
 			req.setAttribute("galleryVoList", galleryVoList);
 			req.getRequestDispatcher("/WEB-INF/views/gallery/list.jsp").forward(req, resp);		

@@ -10,6 +10,7 @@ import com.kh.app.board.vo.BoardVo;
 import com.kh.app.board.vo.CategoryVo;
 import com.kh.app.db.util.JDBCTemplate;
 import com.kh.app.page.vo.PageVo;
+import com.kh.app.reply.vo.ReplyVo;
 
 public class BoardDao {
 	//게시글 작성하기
@@ -297,6 +298,57 @@ public class BoardDao {
 		JDBCTemplate.close(pstmt);
 		
 		return cnt;
+	}
+	
+	//댓글 목록 조회
+	public List<ReplyVo> getReList(Connection conn, String num) throws SQLException{
+		
+		//sql
+		String sql = "SELECT REF_NO ,CONTENT ,WRITER_NO ,ENROLL_DATE ,STATUS FROM REPLY WHERE REF_NO = ? AND STATUS = 'O' ORDER BY NO DESC";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, num);
+		
+		ResultSet rs = pstmt.executeQuery();
+		List<ReplyVo> ReplyVoList = new ArrayList<ReplyVo>();
+		//rs
+		while(rs.next()){
+
+			String no = rs.getString("NO");
+			String refNo = rs.getString("REF_NO");
+			String content = rs.getString("CONTENT");
+			String writerNo = rs.getString("WRITER_NO");
+			String enrollDate = rs.getString("ENROLL_DATE");
+			String status =	 rs.getString("STATUS");
+			
+			ReplyVo vo = new ReplyVo(no, refNo, content, writerNo, enrollDate, status);
+			ReplyVoList.add(vo);
+		}
+
+		//close
+		JDBCTemplate.close(rs);
+		JDBCTemplate.close(pstmt);
+		
+		return ReplyVoList;
+		
+	}
+	
+	//댓글 작성 기능
+	public int writeReply(Connection conn, ReplyVo vo) throws SQLException {
+		
+		//sql
+		String sql = "INSERT INTO REPLY(NO, REF_NO, CONTENT, WRITER_NO) VALUES(SEQ_REPLY_NO.NEXTVAL, ?,?,?)";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, vo.getRefNo());
+		pstmt.setString(2, vo.getContent());
+		pstmt.setString(3, vo.getWriterNo());
+		
+		int result = pstmt.executeUpdate();
+		
+		//close
+		JDBCTemplate.close(conn);
+		
+		return result;
+		
 	}
 
 }

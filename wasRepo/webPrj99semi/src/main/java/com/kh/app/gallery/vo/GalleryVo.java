@@ -1,137 +1,197 @@
 package com.kh.app.gallery.vo;
 
+import java.util.*;
+
 public class GalleryVo {
  
 	private String galleryNo;
 	private String title;
 	private String content;
 	private String writerNo;
-	private String writerNick;
 	private String hit;
 	private String enrollDate;
 	private String modifyDate;
 	private String status;
 	
+	private String writerNick;
+	
+	// att 관련 필드는, rs 에서 꺼낸 데이터를 임시로 담기 위해서만 사용
 	private String attachmentNo;
 	private String refNo;
 	private String originName;
 	private String changeName;
-	private String filePath;
+	private String filePath;	
+	private String thumbnailYn;
+	
+	private List<AttachmentVo> attachmentVoList = new ArrayList<AttachmentVo>();
+	private AttachmentVo thumbnailVo;
+	
+	public String getSrc() {
+		return thumbnailVo.getFilePath() + thumbnailVo.getChangeName();
+	}	
+	
 	public GalleryVo() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public GalleryVo(String galleryNo, String title, String content, String writerNo, String writerNick, String hit,
-			String enrollDate, String modifyDate, String status, String attachmentNo, String refNo, String originName,
-			String changeName, String filePath) {
+	
+	public GalleryVo(String galleryNo, String title, String content, String writerNo, String hit, String enrollDate,
+			String modifyDate, String status, String writerNick, String attachmentNo, String refNo, String originName,
+			String changeName, String filePath, String thumbnailYn, List<AttachmentVo> attachmentVoList,
+			AttachmentVo thumbnailVo) {
 		super();
 		this.galleryNo = galleryNo;
 		this.title = title;
 		this.content = content;
 		this.writerNo = writerNo;
-		this.writerNick = writerNick;
 		this.hit = hit;
 		this.enrollDate = enrollDate;
 		this.modifyDate = modifyDate;
 		this.status = status;
+		this.writerNick = writerNick;
 		this.attachmentNo = attachmentNo;
 		this.refNo = refNo;
 		this.originName = originName;
 		this.changeName = changeName;
 		this.filePath = filePath;
+		this.thumbnailYn = thumbnailYn;
+		this.attachmentVoList = attachmentVoList;
+		this.thumbnailVo = thumbnailVo;
 	}
-	public String getGalleryNo() {
+	public GalleryVo(String galleryNo, String title, String content, String writerNo, String hit, String enrollDate,
+			String modifyDate, String status, String writerNick, String attachmentNo, String refNo, String originName,
+			String changeName, String filePath, String thumbnailYn) {
+		super();
+		this.galleryNo = galleryNo;
+		this.title = title;
+		this.content = content;
+		this.writerNo = writerNo;
+		this.hit = hit;
+		this.enrollDate = enrollDate;
+		this.modifyDate = modifyDate;
+		this.status = status;
+		this.writerNick = writerNick;
+		this.attachmentNo = attachmentNo;
+		this.refNo = refNo;
+		this.originName = originName;
+		this.changeName = changeName;
+		this.filePath = filePath;
+		this.thumbnailYn = thumbnailYn;
+	}
+
+
+	public final String getGalleryNo() {
 		return galleryNo;
 	}
-	public void setGalleryNo(String galleryNo) {
+	public final void setGalleryNo(String galleryNo) {
 		this.galleryNo = galleryNo;
 	}
-	public String getTitle() {
+	public final String getTitle() {
 		return title;
 	}
-	public void setTitle(String title) {
+	public final void setTitle(String title) {
 		this.title = title;
 	}
-	public String getContent() {
+	public final String getContent() {
 		return content;
 	}
-	public void setContent(String content) {
+	public final void setContent(String content) {
 		this.content = content;
 	}
-	public String getWriterNo() {
+	public final String getWriterNo() {
 		return writerNo;
 	}
-	public void setWriterNo(String writerNo) {
+	public final void setWriterNo(String writerNo) {
 		this.writerNo = writerNo;
 	}
-	public String getWriterNick() {
-		return writerNick;
-	}
-	public void setWriterNick(String writerNick) {
-		this.writerNick = writerNick;
-	}
-	public String getHit() {
+	public final String getHit() {
 		return hit;
 	}
-	public void setHit(String hit) {
+	public final void setHit(String hit) {
 		this.hit = hit;
 	}
-	public String getEnrollDate() {
+	public final String getEnrollDate() {
 		return enrollDate;
 	}
-	public void setEnrollDate(String enrollDate) {
+	public final void setEnrollDate(String enrollDate) {
 		this.enrollDate = enrollDate;
 	}
-	public String getModifyDate() {
+	public final String getModifyDate() {
 		return modifyDate;
 	}
-	public void setModifyDate(String modifyDate) {
+	public final void setModifyDate(String modifyDate) {
 		this.modifyDate = modifyDate;
 	}
-	public String getStatus() {
+	public final String getStatus() {
 		return status;
 	}
-	public void setStatus(String status) {
+	public final void setStatus(String status) {
 		this.status = status;
 	}
-	public String getAttachmentNo() {
+	public final String getWriterNick() {
+		return writerNick;
+	}
+	public final void setWriterNick(String writerNick) {
+		this.writerNick = writerNick;
+	}
+	public final String getAttachmentNo() {
 		return attachmentNo;
 	}
-	public void setAttachmentNo(String attachmentNo) {
+	public final void setAttachmentNo(String attachmentNo) {
 		this.attachmentNo = attachmentNo;
 	}
-	public String getRefNo() {
+	public final String getRefNo() {
 		return refNo;
 	}
-	public void setRefNo(String refNo) {
+	public final void setRefNo(String refNo) {
 		this.refNo = refNo;
 	}
-	public String getOriginName() {
+	public final String getOriginName() {
 		return originName;
 	}
-	public void setOriginName(String originName) {
+	public final void setOriginName(String originName) {
 		this.originName = originName;
 	}
-	public String getChangeName() {
+	public final String getChangeName() {
 		return changeName;
 	}
-	public void setChangeName(String changeName) {
+	public final void setChangeName(String changeName) {
 		this.changeName = changeName;
 	}
-	public String getFilePath() {
+	public final String getFilePath() {
 		return filePath;
 	}
-	public void setFilePath(String filePath) {
+	public final void setFilePath(String filePath) {
 		this.filePath = filePath;
 	}
-	public String getSrc() {
-		return filePath + changeName;
+	public final String getThumbnailYn() {
+		return thumbnailYn;
 	}
+	public final void setThumbnailYn(String thumbnailYn) {
+		this.thumbnailYn = thumbnailYn;
+	}
+
+	public final List<AttachmentVo> getAttachmentVoList() {
+		return attachmentVoList;
+	}
+	public final void setAttachmentVoList(List<AttachmentVo> attachmentVoList) {
+		this.attachmentVoList = attachmentVoList;
+	}
+	public final AttachmentVo getThumbnailVo() {
+		return thumbnailVo;
+	}
+	public final void setThumbnailVo(AttachmentVo thumbnailVo) {
+		this.thumbnailVo = thumbnailVo;
+	}
+
 	@Override
 	public String toString() {
 		return "GalleryVo [galleryNo=" + galleryNo + ", title=" + title + ", content=" + content + ", writerNo="
-				+ writerNo + ", writerNick=" + writerNick + ", hit=" + hit + ", enrollDate=" + enrollDate
-				+ ", modifyDate=" + modifyDate + ", status=" + status + ", attachmentNo=" + attachmentNo + ", refNo="
-				+ refNo + ", originName=" + originName + ", changeName=" + changeName + ", filePath=" + filePath + "]";
+				+ writerNo + ", hit=" + hit + ", enrollDate=" + enrollDate + ", modifyDate=" + modifyDate + ", status="
+				+ status + ", writerNick=" + writerNick + ", attachmentNo=" + attachmentNo + ", refNo=" + refNo
+				+ ", originName=" + originName + ", changeName=" + changeName + ", filePath=" + filePath
+				+ ", thumbnailYn=" + thumbnailYn + ", attachmentVoList=" + attachmentVoList + ", thumbnailVo="
+				+ thumbnailVo + "]";
 	}
+	
 }

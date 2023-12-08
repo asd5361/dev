@@ -1,6 +1,7 @@
 package com.kh.app.board.controller;
 
 import java.io.IOException;
+import java.util.*;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.kh.app.board.service.BoardService;
 import com.kh.app.board.vo.BoardVo;
+import com.kh.app.reply.vo.ReplyVo;
 
 @WebServlet("/board/detail")
 public class BoardDetailController extends HttpServlet{
@@ -23,14 +25,14 @@ public class BoardDetailController extends HttpServlet{
 			
 			//service
 			BoardService bs = new BoardService();
-			BoardVo boardVo = bs.selectBoardByNo(boardNo);
+			Map<String,Object> map = bs.selectBoardByNo(boardNo);
+			BoardVo vo = (BoardVo) map.get("vo");
+// ajax처리	List<ReplyVo> replyVoList = (List<ReplyVo>) map.get("replyVoList");
 			
 			//result == view
-			if(boardVo == null) {
-				throw new Exception("[ERROR-B002]게시글 상세 조회 중 에러 발생");
-			}
 			
-			req.setAttribute("boardVo", boardVo);
+			req.setAttribute("boardVo", vo);
+//			req.setAttribute("replyVoList", replyVoList);
 			req.setAttribute("currPage", req.getParameter("currPage"));
 			req.getRequestDispatcher("/WEB-INF/views/board/detail.jsp").forward(req, resp);
 		
