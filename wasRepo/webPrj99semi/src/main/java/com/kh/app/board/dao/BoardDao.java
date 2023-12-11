@@ -350,5 +350,34 @@ public class BoardDao {
 		return result;
 		
 	}
+	
+	//댓글 조회 기능
+	public List<ReplyVo> getReplyList(Connection conn, String refNo) throws SQLException {
+		
+		//sql
+		String sql ="SELECT * FROM REPLY WHERE REF_NO = ?";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, refNo);
+		ResultSet rs = pstmt.executeQuery();
+		List<ReplyVo> replyVoList = new ArrayList<ReplyVo>();
+		
+		while(rs.next()) {
+			ReplyVo vo = new ReplyVo();
+			vo.setNo(rs.getString("NO"));
+			vo.setRefNo(rs.getString("REF_NO"));
+			vo.setContent(rs.getString("CONTENT"));
+			vo.setWriterNo(rs.getString("WRITER_NO"));
+			vo.setEnrollDate(rs.getString("ENROLL_DATE"));
+			vo.setStatus(rs.getString("STATUS"));
+			
+			replyVoList.add(vo);
+			
+		}
+		
+		JDBCTemplate.close(rs);
+		JDBCTemplate.close(pstmt);
+		
+		return replyVoList;
+	}
 
 }

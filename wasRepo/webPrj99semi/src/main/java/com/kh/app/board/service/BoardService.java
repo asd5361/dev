@@ -191,4 +191,19 @@ public class BoardService {
 		return cnt;
 	}
 
+	public List<ReplyVo> getReplyList(String refNo) throws Exception {
+		
+		//conn
+		Connection conn =JDBCTemplate.getConnection();
+		
+		//dao
+		BoardDao dao = new BoardDao();
+		List<ReplyVo> replyVoList = dao.getReplyList(conn, refNo);
+		
+		//close
+		JDBCTemplate.close(conn);
+		
+		return replyVoList;
+	}
+
 }

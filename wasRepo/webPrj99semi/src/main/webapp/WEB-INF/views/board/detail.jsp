@@ -87,18 +87,19 @@
 
 	//ajax를 이용하여 댓글 목록 조회
 	function getReplyList(refNo){
-		fetch("/app99/board/reply/list?no=1")
-		.then((resp)=>{ return resp.json() })
-		.then((data)=>{ console.log(replyVoList) })
+		fetch("/app99/board/reply/list?refNo="+refNo)
+		.then((resp)=>{ return resp.json(); })
+		.then((data)=>{ console.log(data) })
 		.catch(()=>{ alert("댓글 불러오기 실패"); });
 	}
+	getReplyList(1);
 	
-	//댓글 목록들을 화면에 보여주기
-	function setReplyArea() {
-		const divTap = document.querySelector("#replyArea");
-		const replyVoList = getReplyList(1);
-		divTap.innerHTML = replyVoList;
-	}
+// 	//댓글 목록들을 화면에 보여주기
+// 	function setReplyArea() {
+// 		const divTap = document.querySelector("#replyArea");
+// 		const replyVoList = getReplyList(1);
+// 		divTap.innerHTML = replyVoList;
+// 	}
 	
 </script>
 </body>
