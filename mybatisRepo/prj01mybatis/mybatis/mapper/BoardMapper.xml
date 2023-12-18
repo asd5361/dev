@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="BoardMapper">
+  <select id="selectBoardList" resultType="BoardVo">
+    SELECT * FROM BOARD_TEMP
+  </select>
+  
+  <insert id="insertBoard">
+    INSERT INTO BOARD_TEMP (TITLE, CONTENT) VALUES (#{title}, #{content})
+  </insert>
+  
+  <select id="loginMember" resultType="MemberVo">
+  	SELECT * FROM MEMBER_TEMP WHERE ID = #{id} AND PWD = #{pwd}
+  </select>
+  
+  <insert id="insertMember">
+  	<if test="pwd == pwd2">
+  		INSERT INTO MEMBER_TEMP (ID,PWD,NICK) VALUES (#{id},#{pwd},#{nick})
+  	</if>
+  </insert>
+</mapper>
