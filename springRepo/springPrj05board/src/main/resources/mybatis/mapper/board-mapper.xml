@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="boardMapper">
+	<insert id="insertBoard">
+		INSERT INTO BOARD (NO,TITLE,CONTENT) VALUES(SEQ_BOARD_NO.NEXTVAL,#{title},#{content})
+	</insert>
+	
+	<select id="getBoardList" resultType="com.kh.app.board.vo.BoardVo">
+		SELECT * FROM BOARD
+	</select>
+	
+	<select id="getBoardByNo" resultType="com.kh.app.board.vo.BoardVo">
+		SELECT * FROM BOARD WHERE NO = #{no}
+	</select>
+	
+	<delete id="deleteBoardByNo">
+		DELETE BOARD WHERE NO = #{no}
+	</delete>
+	
+	<update id="setBoardByNo">
+		UPDATE BOARD 
+		<set>
+			<if test="title != null">TITLE = #{title},</if>
+			<if test="content != null">CONTENT = #{content}</if>
+		</set>
+		WHERE NO = #{no}
+	</update>
+</mapper>
