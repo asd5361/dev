@@ -5,15 +5,41 @@
 <mapper namespace="MemberMapper">
 
 <insert id="join">
-	INSERT INTO MEMBER (NO,ID,PWD,NICK) VALUES (SEQ_MEMBER_NO.NEXTVAL,#{id},#{pwd},#{nick})	
+	INSERT INTO 
+	MEMBER 
+	(
+		NO,ID,PWD,NICK
+	) 
+	VALUES 
+	(
+		SEQ_MEMBER_NO.NEXTVAL,#{id},#{pwd},#{nick}
+	)	
 </insert>
 
 <select id="list" resultType="com.kh.app.member.vo.MemberVo">
-	SELECT * FROM MEMBER
+	SELECT 
+		NO
+		,ID
+		,PWD
+		,NICK
+		,ENROLL_DATE
+		,DEL_YN
+	FROM 
+		MEMBER
 </select>
 
 <select id="detail" resultType="com.kh.app.member.vo.MemberVo">
-	SELECT * FROM MEMBER WHERE NO = #{no}
+	SELECT
+		NO
+		,ID
+		,PWD
+		,NICK
+		,ENROLL_DATE
+		,DEL_YN
+	 FROM 
+	 	MEMBER 
+	 WHERE 
+	 	NO = #{no}
 </select>
 
 <delete id="delete">
