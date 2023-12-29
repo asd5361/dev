@@ -7,6 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.app.board.service.BoardService;
 import com.kh.app.board.vo.BoardVo;
@@ -19,7 +20,7 @@ import lombok.RequiredArgsConstructor;
 public class BoardController {
 
 	private final BoardService service;
-	//°Ô½Ã±Û ÀÛ¼º
+	// ê²Œì‹œê¸€ ì‘ì„±
 	@PostMapping("insert")
 	public String insert(BoardVo vo) throws Exception {
 		int result = service.insert(vo);
@@ -28,7 +29,7 @@ public class BoardController {
 		}
 		return "redirect:/board/list";
 	}
-	//°Ô½Ã±Û ¸ñ·Ï Á¶È¸
+	// ê²Œì‹œê¸€ ëª©ë¡ ì¡°íšŒ (data ë¥¼ JSP ì—ê²Œ ë„˜ê²¨ì„œ í™”ë©´(data+view) ë‹¤ ë§Œë“¤ì–´ì¤Œ)
 	@GetMapping("list")
 	public String list(Model model) throws Exception {
 		List<BoardVo> voList = service.list();
@@ -38,7 +39,15 @@ public class BoardController {
 		model.addAttribute("boardVoList",voList);
 		return "board/list";
 	}
-	//°Ô½Ã±Û »ó¼¼ Á¶È¸ (¹øÈ£)
+	// ê²Œì‹œê¸€ ëª©ë¡ ì¡°íšŒ (data ë§Œ ì‘ë‹µí•´ì¤Œ)
+	@GetMapping("rest/list")
+	@ResponseBody
+	public List<BoardVo> restlist(){
+		List<BoardVo> voList = service.list();
+		return voList;
+	}
+	
+	// ê²Œì‹œê¸€ ìƒì„¸ ì¡°íšŒ (ë²ˆí˜¸)
 	@GetMapping("detail")
 	public String detail(BoardVo vo ,Model model) throws Exception {
 		BoardVo boardVo = service.detail(vo);
@@ -48,7 +57,7 @@ public class BoardController {
 		model.addAttribute("boardVo",boardVo);
 		return "board/detail";
 	}
-	//°Ô½Ã±Û »èÁ¦ (¹øÈ£)
+	// ê²Œì‹œê¸€ ì‚­ì œ (ë²ˆí˜¸)
 	@GetMapping("delete")
 	public String delete(BoardVo vo) throws Exception {
 		int result = service.delete(vo);
@@ -57,7 +66,7 @@ public class BoardController {
 		}
 		return "redirect:/board/list";
 	}
-	//°Ô½Ã±Û ¼öÁ¤ (Á¦¸ñ, ³»¿ë)
+	// ê²Œì‹œê¸€ ìˆ˜ì • (ì œëª©, ë‚´ìš©)
 	@PostMapping("edit")
 	public String edit(BoardVo vo) throws Exception {
 		int result = service.edit(vo);

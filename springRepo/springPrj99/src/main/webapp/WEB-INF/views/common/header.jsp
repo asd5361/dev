@@ -72,8 +72,8 @@
 </div>
 
 <div class="nav">
-	<div>게시판</div>
-	<div>공지사항</div>
+	<div><a href="/app/board/list">게시판</a></div>
+	<div><a>공지사항</a></div>
 	<div>갤러리</div>
 	<div>마이페이지</div>
 </div>
