@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -38,27 +38,72 @@ const Header = () => {
     
     const navigate = useNavigate();
 
-    const handleClickJoin = () => {
-        navigate('/member/join');
-    };
+    let [loginMemberVo,setLoginMemberVo] = useState(null);
 
     const handleClickLogo = () => {
         navigate('/');
     };
+    const handleClickJoin = () => {
+        navigate('/member/join');
+    };
+    const [vo,setVo] = useState();
+    
+    const handleInputChange = (event) => {
+        const {value,name} = event.target;
+        setVo({
+            ...vo,
+            [name] : value
+        });
+    }
+
+    const handleClickLogin = (event) => {
+
+        event.preventDefault();
+
+        fetch("http://127.0.0.1:8888/app/rest/member/login",{
+            method : "POST",
+            headers : {
+                "Content-Type" : "application/json",
+            },
+            body : JSON.stringify(vo),
+        })
+        .then( (resp) => { return resp.json() } )
+        .then( (data)=>{
+            console.log(data);
+            if(data.msg === "good"){
+                alert("로그인 성공");
+                setLoginMemberVo(data.loginMember);
+            }else{
+                alert("로그인 실패");
+            }
+        })
+        .catch( (e)=>{ console.log(e);} )
+        .finally(()=>{  })
+        ;
+    };
+    
 
 
     return (
         <StyledHeaderDiv>
             <div></div>
             <div className='logoArea' onClick={handleClickLogo}></div>
-            <StyledLoginAreaDiv>
-                <form action='/member/login' method='post'>
-                    <input type="text" name='id' placeholder='아이디'/>
-                    <input type="password" name='pwd' placeholder='패스워드'/>
-                    <input type="button" value="회원가입" onClick={handleClickJoin}/>
-                    <input type="submit" value="로그인" />
-                </form>
-            </StyledLoginAreaDiv>
+            { 
+                loginMemberVo === null 
+                ?  
+                <StyledLoginAreaDiv>
+                    <form onSubmit={handleClickLogin} >
+                        <input type="text" name='id' onChange={handleInputChange} placeholder='아이디'/>
+                        <input type="password" name='pwd'  onChange={handleInputChange} placeholder='패스워드'/>
+                        <input type="button" value="회원가입" onClick={handleClickJoin}/>
+                        <input type="submit" value="로그인" />
+                    </form>
+                </StyledLoginAreaDiv>
+                : 
+                <div>
+                    <h3>{loginMemberVo.nick}님 환영합니다.</h3>
+                </div>
+            }
         </StyledHeaderDiv>
     );
 };
