@@ -2,6 +2,8 @@ package com.kh.app.member.controller;
 
 import java.util.HashMap;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -40,16 +42,16 @@ public class MemberRestController {
 	}
 	
 	@PostMapping("login")
-	public HashMap<String,Object> login(@RequestBody MemberVo vo){
+	public HashMap<String,Object> login(@RequestBody MemberVo vo, HttpSession session){
 		System.out.println("fetch를 통해 받은 VO 데이터"+vo);
-		MemberVo loginMemberVo = service.login(vo);
-		
+		MemberVo loginMember = service.login(vo);		
 		HashMap<String, Object> map = new HashMap<String, Object>();
-		if(loginMemberVo == null) {
+		map.put("msg", "good");
+		map.put("loginMember", loginMember);
+		
+		if(loginMember == null) {
 			map.put("msg", "bad");			
 		}
-		map.put("msg", "good");
-		map.put("loginMember", loginMemberVo);
 		return map;
 	}
 	

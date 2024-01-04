@@ -1,5 +1,5 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 const StyledNaviDiv = styled.div`
@@ -22,9 +22,9 @@ const Navi = () => {
     
     return (
         <StyledNaviDiv>
-            <div onClick={ ()=>{f01('/board/list')} }>게시판</div>
-            <div onClick={ ()=>{f01('/notice/list')} }>공지사항</div>
-            <div onClick={ ()=>{f01('/board/gallery')} }>갤러리</div>
+            <div><Link to={"/board/list"}>게시판</Link></div>
+            <div><Link to={"/notice/list"}>공지사항</Link></div>
+            <div><Link to={"/gallery/list"}>갤러리</Link></div>
         </StyledNaviDiv>
     );
 };
