@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -38,8 +38,10 @@ const Header = () => {
     
     const navigate = useNavigate();
 
-    let [loginMemberVo,setLoginMemberVo] = useState(null);
-
+    // const [loginMemberVo,setLoginMemberVo] = useState(JSON.parse(sessionStorage.getItem("loginMemberVo")));
+    
+    const [loginMemberVo,setLoginMemberVo] = useState(null);
+    
     const handleClickLogo = () => {
         navigate('/');
     };
@@ -72,7 +74,11 @@ const Header = () => {
             console.log(data);
             if(data.msg === "good"){
                 alert("로그인 성공");
-                setLoginMemberVo(data.loginMember);
+                // setLoginMemberVo(data.loginMember);
+                sessionStorage.setItem("loginMemberVo",JSON.stringify(data.loginMember));
+                const jsonStr = sessionStorage.getItem("loginMemberVo");
+                const sessionLoginMemberVo = JSON.parse(jsonStr);
+                setLoginMemberVo(sessionLoginMemberVo);
             }else{
                 alert("로그인 실패");
             }
@@ -89,7 +95,7 @@ const Header = () => {
             <div></div>
             <div className='logoArea' onClick={handleClickLogo}></div>
             { 
-                loginMemberVo === null 
+                loginMemberVo === null
                 ?  
                 <StyledLoginAreaDiv>
                     <form onSubmit={handleClickLogin} >
@@ -102,6 +108,8 @@ const Header = () => {
                 : 
                 <div>
                     <h3>{loginMemberVo.nick}님 환영합니다.</h3>
+                    <button onClick={ ()=>{ sessionStorage.removeItem("loginMemberVo"); setLoginMemberVo(null)
+                } }>로그아웃</button>
                 </div>
             }
         </StyledHeaderDiv>

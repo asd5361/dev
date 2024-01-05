@@ -15,8 +15,18 @@ const StlyedBoardWriteDiv = styled.div`
 `;
 
 const BoardWrite = () => {
+
+    const str = sessionStorage.getItem("loginMemberVo");
+    const vo = JSON.parse(str);
+    const writerNo = vo.no;
     
-    const [inputBoardVo,setInputBoardVo] = useState({});
+    const [inputBoardVo,setInputBoardVo] = useState({
+
+        //작성자 번호 삽입 key value가 동일하면 이렇게 작성해도 된다.
+        // writerNo : JSON.parse(sessionStorage.getItem("loginMemberVo")).no,
+        // (동일) "writerNo" : writerNo,
+        writerNo,
+    });
     const navigator = useNavigate();
 
     const handleSubmit = (event) => {

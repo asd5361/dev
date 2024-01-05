@@ -38,8 +38,6 @@ public class BoardApiController {
 	
 	@PostMapping("write")
 	public Map<String,String> write(@RequestBody BoardVo vo, HttpSession session){
-		//writerNo 정보는 임의로 데이터 채움
-		vo.setWriterNo("1");
 		
 		Map<String,String> map = new HashMap<String, String>();
 		

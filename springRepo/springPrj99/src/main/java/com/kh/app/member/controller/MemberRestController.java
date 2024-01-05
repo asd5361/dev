@@ -42,8 +42,7 @@ public class MemberRestController {
 	}
 	
 	@PostMapping("login")
-	public HashMap<String,Object> login(@RequestBody MemberVo vo, HttpSession session){
-		System.out.println("fetch를 통해 받은 VO 데이터"+vo);
+	public HashMap<String,Object> login(@RequestBody MemberVo vo){
 		MemberVo loginMember = service.login(vo);		
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("msg", "good");
