@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="GalleryMapper">
+
+	<insert id="write">
+		INSERT INTO GALLERY
+		(
+		    NO
+		    ,TITLE
+		    ,FULL_PATH
+		    ,WRITER_NO
+		)
+		VALUES
+		(
+		    SEQ_GALLERY_NO.NEXTVAL
+		    , #{title}
+		    , #{fullPath}
+		    , #{writerNo}
+		)	
+	</insert>
+	
+	<select id="list" resultType="GalleryVo">
+		SELECT 
+		    NO
+		    ,TITLE
+		    ,FULL_PATH
+		    ,WRITER_NO
+		    ,HIT
+		    ,ENROLL_DATE
+		    ,MODIFY_DATE
+		    ,STATUS
+		FROM GALLERY
+		WHERE STATUS = 'O'
+		ORDER BY NO DESC
+	</select>
+	
+	<select id="detail" resultType="GalleryVo">
+		SELECT 
+		    NO
+		    ,TITLE
+		    ,FULL_PATH
+		    ,WRITER_NO
+		    ,HIT
+		    ,ENROLL_DATE
+		    ,MODIFY_DATE
+		    ,STATUS
+		FROM GALLERY
+		WHERE NO = #{no}
+	</select>
+	
+	<update id="increaseHit">
+		UPDATE 
+			GALLERY
+	    SET 
+	    	HIT = HIT+1
+		WHERE
+			NO = {no}
+		AND 
+	    	STATUS = 'O'
+	</update>
+	
+	<update id="edit">
+		UPDATE 
+			GALLERY
+	    SET 
+	        TITLE = #{title}
+	    WHERE 
+	    	NO = {no}
+	    AND 
+	    	STATUS = 'O'	
+	</update>
+	
+	<update id="delete">
+	UPDATE 
+		GALLERY
+    SET
+        STATUS = 'X'
+    WHERE 
+    	NO = #{no}	
+	</update>
+	
+</mapper>
