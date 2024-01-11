@@ -5,7 +5,8 @@ import java.util.List;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Service;
 
-import com.kh.app.board.dao.BoardDao;
+import com.kh.app.board.dao.BoardDaoImpl;
+import com.kh.app.board.dao.BoardDaoOracle;
 import com.kh.app.board.vo.BoardVo;
 
 import lombok.RequiredArgsConstructor;
@@ -13,8 +14,8 @@ import lombok.RequiredArgsConstructor;
 @Service
 @RequiredArgsConstructor
 public class BoardService {
-
-	private final BoardDao dao;
+	
+	private final BoardDaoImpl dao;
 	private final SqlSessionTemplate sst;
 	
 	public int insert(BoardVo vo) {
