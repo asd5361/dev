@@ -11,12 +11,12 @@
 	
 	<!-- Root Context: defines shared resources visible to all other web components -->
 	
-	<!-- 
-	우리가 만든 필터 등록은 여기에 등록해야됨
-	<bean id="myFilter" class="com.kh.app.filter.MyFilter">
-		
+	
+	<!-- 우리가 만든 필터 등록은 여기에 등록해야됨 (24.01.08 filter 허수아비 필터 빈 등록)-->
+	<bean id="abc" class="com.kh.app.filter.AbcFilter">
+	
 	</bean>
-	 -->
+	
 	 
 	<!-- database -->
 	

@@ -1,8 +1,10 @@
 package com.kh.app.board.vo;
 
+import lombok.Builder;
 import lombok.Data;
 
 @Data
+@Builder
 public class BoardVo {
 
 	private String no;

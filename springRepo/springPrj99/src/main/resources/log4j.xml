@@ -2,21 +2,40 @@
 <!DOCTYPE log4j:configuration PUBLIC "-//APACHE//DTD LOG4J 1.2//EN" "log4j.dtd">
 <log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
 
+<!-- 
+	*** 출력패턴 ****
+	%p : 우선순위
+	%c : 클래스
+	%m : 메세지
+	%n : 개행	
+	%d : 시간
+	%M : 메소드명
+ -->
+ 
 	<!-- Appenders -->
 	<appender name="console" class="org.apache.log4j.ConsoleAppender">
 		<param name="Target" value="System.out" />
 		<layout class="org.apache.log4j.PatternLayout">
-			<param name="ConversionPattern" value="%-5p: %c - %m%n" />
+			<param name="ConversionPattern" value="[%-5p][%d{yyyy-MM-dd hh:mm:ss}]: %c - %m%n" />
 		</layout>
 	</appender>
 	
+	<!-- 파일에 저장하는 어펜더 -->
+	<appender name="fa" class="org.apache.log4j.FileAppender">
+      <param name="file" value="D:\\dev\\khlogFile.txt"/>
+      <param name="append" value="true"/>
+      <layout class="org.apache.log4j.PatternLayout">
+         <param name="ConversionPattern" value="%p[%d{yyyy-MM-dd hh:mm:ss}] %c - %m%n" />
+      </layout>
+   </appender>
+   
 	<!-- Application Loggers -->
-	<logger name="com.kh.app">
+<!-- 	<logger name="com.kh.app">
 		<level value="info" />
-	</logger>
+	</logger> -->
 	
 	<!-- 3rdparty Loggers -->
-	<logger name="org.springframework.core">
+<!-- 	<logger name="org.springframework.core">
 		<level value="info" />
 	</logger>
 	
@@ -30,12 +49,13 @@
 
 	<logger name="org.springframework.web">
 		<level value="info" />
-	</logger>
+	</logger> -->
 
 	<!-- Root Logger -->
 	<root>
-		<priority value="warn" />
+		<priority value="info" />
 		<appender-ref ref="console" />
+		<appender-ref ref="fa" />
 	</root>
 	
 </log4j:configuration>
